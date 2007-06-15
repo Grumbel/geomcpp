@@ -36,16 +36,21 @@ public:
   Vector p1;
   Vector p2;
 
+  Line() {}
+  
   Line(const Vector& p1,
        const Vector& p2);  
   
   float length() const;
 
-  /** Calculate if and where two lines collide */
-  bool collide(const Line& line, float& a, float& b);
+  /** Calculate if and where two lines intersect
+   *  @param a  
+   *  @param b 
+   */
+  bool intersect(const Line& line_b, float& ua, float& ub);
 
-  /** Calculate if and where two lines collide */
-  bool collide(const Line& line, Vector& colpos);
+  /** Calculate if and where two lines intersect */
+  bool intersect(const Line& line, Vector& colpos);
 
 private:
   Line (const Line&);
