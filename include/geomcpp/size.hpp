@@ -76,34 +76,34 @@ T area(tsize<T> const& size) {
 }
 
 template<typename T> inline
-tpoint<T> anchor_point(tsize<T> const& size, Origin origin) {
+tpoint<T> anchor_point(tsize<T> const& size, origin origin) {
   switch(origin)
   {
-    case Origin::TOP_LEFT:
+    case origin::TOP_LEFT:
       return tpoint<T>(0, 0);
 
-    case Origin::TOP_CENTER:
+    case origin::TOP_CENTER:
       return tpoint<T>(size.width() / 2, 0);
 
-    case Origin::TOP_RIGHT:
+    case origin::TOP_RIGHT:
       return tpoint<T>(size.width(), 0);
 
-    case Origin::CENTER_LEFT:
+    case origin::CENTER_LEFT:
       return tpoint<T>(0, size.height() / 2);
 
-    case Origin::CENTER:
+    case origin::CENTER:
       return tpoint<T>(size.width() / 2, size.height() / 2);
 
-    case Origin::CENTER_RIGHT:
+    case origin::CENTER_RIGHT:
       return tpoint<T>(size.width(), size.height() / 2);
 
-    case Origin::BOTTOM_LEFT:
+    case origin::BOTTOM_LEFT:
       return tpoint<T>(0, size.height());
 
-    case Origin::BOTTOM_CENTER:
+    case origin::BOTTOM_CENTER:
       return tpoint<T>(size.width() / 2, size.height());
 
-    case Origin::BOTTOM_RIGHT:
+    case origin::BOTTOM_RIGHT:
       return tpoint<T>(size.width(), size.height());
   }
 }

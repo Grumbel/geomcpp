@@ -22,7 +22,7 @@
 
 namespace geomcpp {
 
-enum class Origin
+enum class origin
 {
   TOP_LEFT,
   TOP_CENTER,

@@ -137,20 +137,20 @@ tpoint<T> center(trect<T> const& rect) {
 }
 
 template<typename T> inline
-tpoint<T> anchor_point(trect<T> const& rect, Origin origin) {
+tpoint<T> anchor_point(trect<T> const& rect, origin origin) {
   tpoint<T> const p = anchor_point(rect.size(), origin);
   return tpoint<T>(p.x() + rect.x(),
                    p.y() + rect.y());
 }
 
 template<typename T> inline
-trect<T> anchored_rect(tsize<T> const& size, Origin origin) {
+trect<T> anchored_rect(tsize<T> const& size, origin origin) {
   return trect<T>(anchor_point(size, origin),
                   size);
 }
 
 template<typename T> inline
-trect<T> anchored(trect<T> const& rect, Origin origin) {
+trect<T> anchored(trect<T> const& rect, origin origin) {
   return trect<T>(anchor_point(rect.size(), origin),
                   rect.size());
 }
