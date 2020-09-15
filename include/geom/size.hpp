@@ -78,6 +78,12 @@ tsize<T> operator*(tsize<T> const& size, T s) {
 }
 
 template<typename T> inline
+tsize<T> operator/(tsize<T> const& size, T s) {
+  return tsize<T>(size.width() / s,
+                  size.height() / s);
+}
+
+template<typename T> inline
 T area(tsize<T> const& size) {
   return size.width() * size.height();
 }
