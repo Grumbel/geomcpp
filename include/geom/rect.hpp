@@ -32,6 +32,7 @@ template<typename T>
 class trect
 {
 public:
+  constexpr trect() = default;
   constexpr trect(tpoint<T> const& p, tsize<T> const& size) :
     m_point(p), m_size(size) {}
   constexpr trect(tpoint<T> const& lt, tpoint<T> const& rb) :

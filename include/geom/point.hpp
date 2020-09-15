@@ -29,6 +29,7 @@ template<typename T>
 class tpoint
 {
 public:
+  constexpr tpoint() = default;
   constexpr tpoint(T x, T y) :
     m_x(x), m_y(y) {}
   constexpr tpoint(glm::tvec2<T> const& v) :

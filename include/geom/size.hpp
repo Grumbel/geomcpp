@@ -31,6 +31,7 @@ template<typename T>
 class tsize
 {
 public:
+  constexpr tsize() = default;
   constexpr tsize(T width, T height) : m_width(width), m_height(height) {}
   explicit constexpr tsize<T>(glm::vec<2, T> const& v) : m_width(v.x), m_height(v.y) {}
   constexpr tsize<T>(tsize<T> const& size) = default;
