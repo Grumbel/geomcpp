@@ -26,7 +26,7 @@
 
 #include "origin.hpp"
 
-namespace geomcpp {
+namespace geom {
 
 template<typename T>
 class trect
@@ -186,7 +186,7 @@ float aspect_ratio(trect<T> const& rect)
 using irect = trect<int>;
 using frect = trect<float>;
 
-} // namespace geomcpp
+} // namespace geom
 
 #endif
 

@@ -18,10 +18,11 @@
 // 3. This notice may not be removed or altered from any source distribution.
 
 #include <gtest/gtest.h>
-#include <geomcpp/io.hpp>
 #include <sstream>
 
-using namespace geomcpp;
+#include <geom/io.hpp>
+
+using namespace geom;
 
 TEST(io_test, ipoint)
 {

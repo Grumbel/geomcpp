@@ -28,7 +28,7 @@
 #include "size.hpp"
 #include "rect.hpp"
 
-namespace geomcpp {
+namespace geom {
 
 inline
 std::ostream& operator<<(std::ostream& os, ipoint const& point) {
@@ -94,7 +94,7 @@ std::ostream& operator<<(std::ostream& os, origin origin)
   }
 }
 
-} // namespace geomcpp
+} // namespace geom
 
 #endif
 

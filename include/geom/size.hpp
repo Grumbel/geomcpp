@@ -25,7 +25,7 @@
 #include "point.hpp"
 #include "origin.hpp"
 
-namespace geomcpp {
+namespace geom {
 
 template<typename T>
 class tsize
@@ -129,7 +129,7 @@ float aspect_ratio(tsize<T> const& size)
 using isize = tsize<int>;
 using fsize = tsize<float>;
 
-} // namespace geomcpp
+} // namespace geom
 
 #endif
 

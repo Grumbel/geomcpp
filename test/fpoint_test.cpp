@@ -19,9 +19,9 @@
 
 #include <gtest/gtest.h>
 
-#include <geomcpp/size.hpp>
+#include <geom/size.hpp>
 
-using namespace geomcpp;
+using namespace geom;
 
 TEST(fpoint_test, construction)
 {

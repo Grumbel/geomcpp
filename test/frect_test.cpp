@@ -19,12 +19,12 @@
 
 #include <gtest/gtest.h>
 
-#include <geomcpp/io.hpp>
-#include <geomcpp/point.hpp>
-#include <geomcpp/size.hpp>
-#include <geomcpp/rect.hpp>
+#include <geom/io.hpp>
+#include <geom/point.hpp>
+#include <geom/size.hpp>
+#include <geom/rect.hpp>
 
-using namespace geomcpp;
+using namespace geom;
 
 TEST(frect_test, construction1)
 {

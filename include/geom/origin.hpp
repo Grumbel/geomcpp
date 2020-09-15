@@ -20,7 +20,7 @@
 #ifndef HEADER_GEOMCPP_ORIGIN_HPP
 #define HEADER_GEOMCPP_ORIGIN_HPP
 
-namespace geomcpp {
+namespace geom {
 
 enum class origin
 {
@@ -35,7 +35,7 @@ enum class origin
   BOTTOM_RIGHT
 };
 
-} // namespace geomcpp
+} // namespace geom
 
 #endif
 

@@ -23,7 +23,7 @@
 #include <math.h>
 #include <glm/glm.hpp>
 
-namespace geomcpp {
+namespace geom {
 
 template<typename T>
 class tpoint
@@ -77,7 +77,7 @@ tpoint<T> transpose(tpoint<T> const point)
 using ipoint = tpoint<int>;
 using fpoint = tpoint<float>;
 
-} // namespace geomcpp
+} // namespace geom
 
 #endif
 
