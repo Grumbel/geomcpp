@@ -20,6 +20,7 @@
 #ifndef HEADER_GEOMCPP_SIZE_HPP
 #define HEADER_GEOMCPP_SIZE_HPP
 
+#define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 
 #include "point.hpp"
