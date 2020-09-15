@@ -17,8 +17,8 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
-#ifndef HEADER_GEOMCPP_IO_HPP
-#define HEADER_GEOMCPP_IO_HPP
+#ifndef HEADER_GEOMCPP_GEOM_HPP
+#define HEADER_GEOMCPP_GEOM_HPP
 
 #include "io.hpp"
 #include "point.hpp"

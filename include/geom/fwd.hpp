@@ -17,6 +17,9 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
+#ifndef HEADER_GEOMCPP_FWD_HPP
+#define HEADER_GEOMCPP_FWD_HPP
+
 namespace geom {
 
 template<typename T>
@@ -35,5 +38,7 @@ using irect = trect<int>;
 using frect = trect<float>;
 
 } // namespace geom
+
+#endif
 
 /* EOF */
