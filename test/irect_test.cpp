@@ -124,4 +124,9 @@ TEST(irect_test, aspect_ratio)
                   16.0f / 9.0f);
 }
 
+TEST(irect_test, diagonal)
+{
+  EXPECT_FLOAT_EQ(diagonal(irect(0, 0, 40, 30)), 50.0f);
+}
+
 /* EOF */

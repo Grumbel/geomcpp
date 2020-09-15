@@ -186,6 +186,12 @@ float aspect_ratio(trect<T> const& rect)
   return static_cast<float>(rect.size().width()) / static_cast<float>(rect.size().height());
 }
 
+template<typename T> inline
+float diagonal(trect<T> const rect)
+{
+  return sqrtf(static_cast<float>(rect.width() * rect.width() + rect.height() * rect.height()));
+}
+
 using irect = trect<int>;
 using frect = trect<float>;
 
