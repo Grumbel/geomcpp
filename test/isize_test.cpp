@@ -31,6 +31,11 @@ TEST(isize_test, construction)
   EXPECT_EQ(value.height(), 567);
 }
 
+TEST(isize_test, conversion)
+{
+  EXPECT_EQ(isize(fsize(123, 567)), isize(123, 567));
+}
+
 TEST(isize_test, equality)
 {
   EXPECT_TRUE(isize(1, 2) == isize(1, 2));

@@ -31,6 +31,11 @@ TEST(ipoint_test, construction)
   EXPECT_EQ(value.y(), 567);
 }
 
+TEST(ipoint_test, conversion)
+{
+  EXPECT_EQ(ipoint(fpoint(123, 567)), ipoint(123, 567));
+}
+
 TEST(ipoint_test, equality)
 {
   EXPECT_TRUE(ipoint(1, 2) == ipoint(1, 2));

@@ -40,6 +40,12 @@ public:
     m_point(left, top), m_size(right - left, bottom - top) {}
   constexpr trect(trect<T> const& rect) = default;
 
+  template<typename From>
+  constexpr explicit trect<T>(trect<From> const& rect) :
+    m_point(tpoint<T>(rect.point())),
+    m_size(tsize<T>(rect.size()))
+  {}
+
   constexpr tpoint<T> lt() const { return m_point; }
   constexpr tpoint<T> rb() const { return tpoint<T>(right(), bottom()); }
   constexpr tpoint<T> rt() const { return tpoint<T>(right(), top()); }

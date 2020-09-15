@@ -35,6 +35,12 @@ public:
   explicit constexpr tsize<T>(glm::vec<2, T> const& v) : m_width(v.x), m_height(v.y) {}
   constexpr tsize<T>(tsize<T> const& size) = default;
 
+  template<typename From>
+  constexpr explicit tsize<T>(tsize<From> const& size) :
+    m_width(static_cast<T>(size.width())),
+    m_height(static_cast<T>(size.height()))
+  {}
+
   constexpr T width() const { return m_width; }
   constexpr T height() const { return m_height; }
 

@@ -46,6 +46,11 @@ TEST(frect_test, construction2)
   EXPECT_EQ(value.height(), 44);
 }
 
+TEST(frect_test, conversion)
+{
+  EXPECT_EQ(frect(irect(123, 567, 800, 900)), frect(123, 567, 800, 900));
+}
+
 TEST(frect_test, equality)
 {
   EXPECT_TRUE(frect(1, 2, 3, 4) == frect(1, 2, 3, 4));

@@ -35,6 +35,12 @@ public:
     m_x(v.x), m_y(v.y) {}
   constexpr tpoint(tpoint const& p) = default;
 
+  template<typename From>
+  constexpr explicit tpoint<T>(tpoint<From> const& point) :
+    m_x(static_cast<T>(point.x())),
+    m_y(static_cast<T>(point.y()))
+  {}
+
   constexpr T x() const { return m_x; }
   constexpr T y() const { return m_y; }
 
