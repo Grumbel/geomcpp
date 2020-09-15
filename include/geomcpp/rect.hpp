@@ -70,7 +70,7 @@ public:
     return !((*this) == other);
   }
 
-  constexpr operator bool() const {
+  constexpr explicit operator bool() const {
     return (m_size.width() >=0 &&
             m_size.height() >=0);
   }

@@ -49,7 +49,7 @@ public:
     return !(*this == other);
   }
 
-  constexpr operator bool() const {
+  constexpr explicit operator bool() const {
     return (m_width >= 0 &&
             m_height >= 0);
   }
