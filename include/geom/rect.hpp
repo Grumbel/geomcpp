@@ -132,6 +132,14 @@ bool contains(trect<T> const& rect, tpoint<T> const& point) {
 }
 
 template<typename T> inline
+bool contains(trect<T> const& parent, trect<T> const& child) {
+  return (parent.left() <= child.left() &&
+          parent.top() <= child.top() &&
+          child.right() <= parent.right() &&
+          child.bottom() <= parent.bottom());
+}
+
+template<typename T> inline
 trect<T> normalize(trect<T> const& rect) {
   return trect<T>(std::min(rect.left(), rect.right()),
                   std::min(rect.top(), rect.bottom()),

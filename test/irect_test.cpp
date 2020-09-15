@@ -90,6 +90,12 @@ TEST(irect_test, contains)
   EXPECT_FALSE(contains(irect(10, 20, 30, 40), ipoint(-15, -19)));
 }
 
+TEST(irect_test, contains2)
+{
+  EXPECT_TRUE(contains(irect(10, 20, 30, 40), irect(15, 25, 20, 30)));
+  EXPECT_FALSE(contains(irect(10, 20, 30, 40), irect(-15, -19, 100, 100)));
+}
+
 TEST(irect_test, normalize)
 {
   EXPECT_EQ(normalize(irect(10, 20, -30, -40)),

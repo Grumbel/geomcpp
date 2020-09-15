@@ -90,6 +90,12 @@ TEST(frect_test, contains)
   EXPECT_FALSE(contains(frect(10, 20, 30, 40), fpoint(-15, -19)));
 }
 
+TEST(frect_test, contains2)
+{
+  EXPECT_TRUE(contains(frect(10, 20, 30, 40), frect(15, 25, 20, 30)));
+  EXPECT_FALSE(contains(frect(10, 20, 30, 40), frect(-15, -19, 100, 100)));
+}
+
 TEST(frect_test, normalize)
 {
   EXPECT_EQ(normalize(frect(10, 20, -30, -40)),
