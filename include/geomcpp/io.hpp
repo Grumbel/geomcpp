@@ -21,7 +21,9 @@
 #define HEADER_GEOMCPP_IO_HPP
 
 #include <ostream>
+#include <stdexcept>
 
+#include "origin.hpp"
 #include "point.hpp"
 #include "size.hpp"
 #include "rect.hpp"
@@ -72,6 +74,24 @@ std::ostream& operator<<(std::ostream& os, frect const& rect) {
             << rect.top() << ", "
             << rect.right() << ", "
             << rect.bottom() << ")";
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, origin origin)
+{
+  switch(origin)
+  {
+    case origin::TOP_LEFT: return os << "top-left";
+    case origin::TOP_CENTER: return os << "top-center";
+    case origin::TOP_RIGHT: return os << "top-right";
+    case origin::CENTER_LEFT: return os << "center-left";
+    case origin::CENTER: return os << "center";
+    case origin::CENTER_RIGHT: return os << "center-right";
+    case origin::BOTTOM_LEFT: return os << "bottom-left";
+    case origin::BOTTOM_CENTER: return os << "bottom-center";
+    case origin::BOTTOM_RIGHT: return os << "bottom-right";
+    default: throw std::invalid_argument("invalid value for origin");
+  }
 }
 
 } // namespace geomcpp
