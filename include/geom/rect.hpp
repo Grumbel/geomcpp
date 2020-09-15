@@ -37,8 +37,8 @@ public:
   constexpr trect() = default;
   constexpr trect(tpoint<T> const& p, tsize<T> const& size) :
     m_point(p), m_size(size) {}
-  constexpr trect(tpoint<T> const& lt, tpoint<T> const& rb) :
-    m_point(lt), m_size(rb.x() - lt.x(), rb.y() - lt.y()) {}
+  constexpr trect(tpoint<T> const& topleft, tpoint<T> const& bottomright) :
+    m_point(topleft), m_size(bottomright.x() - topleft.x(), bottomright.y() - topleft.y()) {}
   constexpr trect(T left, T top, T right, T bottom) :
     m_point(left, top), m_size(right - left, bottom - top) {}
   constexpr trect(trect<T> const& rect) = default;
