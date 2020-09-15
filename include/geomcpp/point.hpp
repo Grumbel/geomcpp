@@ -25,47 +25,51 @@
 
 namespace geomcpp {
 
-class ipoint
+template<typename T>
+class tpoint
 {
 public:
-  constexpr ipoint(int x, int y) :
+  constexpr tpoint(T x, T y) :
     m_x(x), m_y(y) {}
-  constexpr ipoint(glm::ivec2 const& v) :
+  constexpr tpoint(glm::tvec2<T> const& v) :
     m_x(v.x), m_y(v.y) {}
-  constexpr ipoint(ipoint const& p) = default;
+  constexpr tpoint(tpoint const& p) = default;
 
-  constexpr int x() const { return m_x; }
-  constexpr int y() const { return m_y; }
+  constexpr T x() const { return m_x; }
+  constexpr T y() const { return m_y; }
 
-  constexpr bool operator==(const ipoint& other) const {
+  constexpr bool operator==(const tpoint& other) const {
     return (m_x == other.m_x &&
             m_y == other.m_y);
   }
 
-  constexpr bool operator!=(const ipoint& other) const {
+  constexpr bool operator!=(const tpoint& other) const {
     return !(*this == other);
   }
 
-  glm::ivec2 as_vec() const { return glm::ivec2(m_x, m_y); }
+  glm::vec<2, T> as_vec() const { return glm::vec<2, T>(m_x, m_y); }
 
 private:
-  int m_x;
-  int m_y;
+  T m_x;
+  T m_y;
 };
 
-inline
-float distance(ipoint const& lhs, ipoint const& rhs)
+template<typename T> inline
+float distance(tpoint<T> const& lhs, tpoint<T> const& rhs)
 {
   float const a = static_cast<float>(rhs.x() - lhs.x());
   float const b = static_cast<float>(rhs.y() - lhs.y());
   return sqrtf(a * a + b * b);
 }
 
-inline
-ipoint transpose(ipoint const point)
+template<typename T> inline
+tpoint<T> transpose(tpoint<T> const point)
 {
-  return ipoint(point.y(), point.x());
+  return tpoint<T>(point.y(), point.x());
 }
+
+using ipoint = tpoint<int>;
+using fpoint = tpoint<float>;
 
 } // namespace geomcpp
 

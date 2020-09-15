@@ -28,44 +28,45 @@
 
 namespace geomcpp {
 
-class irect
+template<typename T>
+class trect
 {
 public:
-  constexpr irect(ipoint const& p, isize const& size) :
+  constexpr trect(tpoint<T> const& p, tsize<T> const& size) :
     m_point(p), m_size(size) {}
-  constexpr irect(ipoint const& lt, ipoint const& rb) :
+  constexpr trect(tpoint<T> const& lt, tpoint<T> const& rb) :
     m_point(lt), m_size(rb.x() - lt.x(), rb.y() - lt.y()) {}
-  constexpr irect(int left, int top, int right, int bottom) :
+  constexpr trect(T left, T top, T right, T bottom) :
     m_point(left, top), m_size(right - left, bottom - top) {}
-  constexpr irect(irect const& rect) = default;
+  constexpr trect(trect<T> const& rect) = default;
 
-  constexpr ipoint lt() const { return m_point; }
-  constexpr ipoint rb() const { return ipoint(right(), bottom()); }
-  constexpr ipoint rt() const { return ipoint(right(), top()); }
-  constexpr ipoint lb() const { return ipoint(left(), bottom()); }
+  constexpr tpoint<T> lt() const { return m_point; }
+  constexpr tpoint<T> rb() const { return tpoint<T>(right(), bottom()); }
+  constexpr tpoint<T> rt() const { return tpoint<T>(right(), top()); }
+  constexpr tpoint<T> lb() const { return tpoint<T>(left(), bottom()); }
 
-  constexpr ipoint point() const { return m_point; }
-  constexpr isize size() const { return m_size; }
+  constexpr tpoint<T> point() const { return m_point; }
+  constexpr tsize<T> size() const { return m_size; }
 
-  constexpr int left() const { return m_point.x(); }
-  constexpr int right() const { return m_point.x() + m_size.width(); }
-  constexpr int top() const { return m_point.y(); }
-  constexpr int bottom() const { return m_point.y() + m_size.height(); }
+  constexpr T left() const { return m_point.x(); }
+  constexpr T right() const { return m_point.x() + m_size.width(); }
+  constexpr T top() const { return m_point.y(); }
+  constexpr T bottom() const { return m_point.y() + m_size.height(); }
 
-  constexpr int x() const { return m_point.x(); }
-  constexpr int y() const { return m_point.y(); }
-  constexpr int w() const { return m_size.width(); }
-  constexpr int h() const { return m_size.height(); }
+  constexpr T x() const { return m_point.x(); }
+  constexpr T y() const { return m_point.y(); }
+  constexpr T w() const { return m_size.width(); }
+  constexpr T h() const { return m_size.height(); }
 
-  constexpr int width() const { return m_size.width(); }
-  constexpr int height() const { return m_size.height(); }
+  constexpr T width() const { return m_size.width(); }
+  constexpr T height() const { return m_size.height(); }
 
-  constexpr bool operator==(const irect& other) const {
+  constexpr bool operator==(const trect<T>& other) const {
     return (m_point == other.m_point &&
             m_size == other.m_size);
   }
 
-  constexpr bool operator!=(const irect& other) const {
+  constexpr bool operator!=(const trect<T>& other) const {
     return !((*this) == other);
   }
 
@@ -75,106 +76,109 @@ public:
   }
 
 private:
-  ipoint m_point;
-  isize m_size;
+  tpoint<T> m_point;
+  tsize<T> m_size;
 };
 
-inline
-int area(irect const& rect) {
+template<typename T> inline
+int area(trect<T> const& rect) {
   return area(rect.size());
 }
 
-inline
-irect grow(irect const& rect, int v) {
-  return irect(rect.left() - v,
-               rect.top() - v,
-               rect.right() + v,
-               rect.bottom() + v);
+template<typename T> inline
+trect<T> grow(trect<T> const& rect, T v) {
+  return trect<T>(rect.left() - v,
+                  rect.top() - v,
+                  rect.right() + v,
+                  rect.bottom() + v);
 }
 
-inline
-irect grow(irect const& rect, int x, int y) {
-  return irect(rect.left() - x,
-               rect.top() - y,
-               rect.right() + x,
-               rect.bottom() + y);
+template<typename T> inline
+trect<T> grow(trect<T> const& rect, T x, T y) {
+  return trect<T>(rect.left() - x,
+                  rect.top() - y,
+                  rect.right() + x,
+                  rect.bottom() + y);
 }
 
-inline
-irect intersection(irect const& lhs, irect const& rhs) {
-  return irect(std::max(lhs.left(), rhs.left()),
-               std::max(lhs.top(), rhs.top()),
-               std::min(lhs.right(), rhs.right()),
-               std::min(lhs.bottom(), rhs.bottom()));
+template<typename T> inline
+trect<T> intersection(trect<T> const& lhs, trect<T> const& rhs) {
+  return trect<T>(std::max(lhs.left(), rhs.left()),
+                  std::max(lhs.top(), rhs.top()),
+                  std::min(lhs.right(), rhs.right()),
+                  std::min(lhs.bottom(), rhs.bottom()));
 }
 
-inline
-bool intersects(irect const& lhs, irect const& rhs) {
+template<typename T> inline
+bool intersects(trect<T> const& lhs, trect<T> const& rhs) {
   return static_cast<bool>(intersection(lhs, rhs));
 }
 
-inline
-bool contains(irect const& rect, ipoint const& point) {
+template<typename T> inline
+bool contains(trect<T> const& rect, tpoint<T> const& point) {
   return (rect.left() <= point.x() &&
           rect.top() <= point.y() &&
           point.x() < rect.right() &&
           point.y() < rect.bottom());
 }
 
-inline
-irect normalize(irect const& rect) {
-  return irect(std::min(rect.left(), rect.right()),
-               std::min(rect.top(), rect.bottom()),
-               std::max(rect.left(), rect.right()),
-               std::max(rect.top(), rect.bottom()));
+template<typename T> inline
+trect<T> normalize(trect<T> const& rect) {
+  return trect<T>(std::min(rect.left(), rect.right()),
+                  std::min(rect.top(), rect.bottom()),
+                  std::max(rect.left(), rect.right()),
+                  std::max(rect.top(), rect.bottom()));
 }
 
-inline
-ipoint center(irect const& rect) {
-  return ipoint(rect.left() + rect.width() / 2,
-                rect.top() + rect.height() / 2);
+template<typename T> inline
+tpoint<T> center(trect<T> const& rect) {
+  return tpoint<T>(rect.left() + rect.width() / 2,
+                   rect.top() + rect.height() / 2);
 }
 
-inline
-ipoint anchor_point(irect const& rect, Origin origin) {
-  ipoint const p = anchor_point(rect.size(), origin);
-  return ipoint(p.x() + rect.x(),
-                p.y() + rect.y());
+template<typename T> inline
+tpoint<T> anchor_point(trect<T> const& rect, Origin origin) {
+  tpoint<T> const p = anchor_point(rect.size(), origin);
+  return tpoint<T>(p.x() + rect.x(),
+                   p.y() + rect.y());
 }
 
-inline
-irect anchored_rect(isize const& size, Origin origin) {
-  return irect(anchor_point(size, origin),
-               size);
+template<typename T> inline
+trect<T> anchored_rect(tsize<T> const& size, Origin origin) {
+  return trect<T>(anchor_point(size, origin),
+                  size);
 }
 
-inline
-irect anchored(irect const& rect, Origin origin) {
-  return irect(anchor_point(rect.size(), origin),
-               rect.size());
+template<typename T> inline
+trect<T> anchored(trect<T> const& rect, Origin origin) {
+  return trect<T>(anchor_point(rect.size(), origin),
+                  rect.size());
 }
 
 /** Create a rectangle that contain boths lhs and rhs */
-inline
-irect unite(irect const& lhs, irect const& rhs)
+template<typename T> inline
+trect<T> unite(trect<T> const& lhs, trect<T> const& rhs)
 {
-  return irect(std::min(lhs.left(), rhs.left()),
-               std::min(lhs.top(), rhs.top()),
-               std::max(lhs.right(), rhs.right()),
-               std::max(lhs.bottom(), rhs.bottom()));
+  return trect<T>(std::min(lhs.left(), rhs.left()),
+                  std::min(lhs.top(), rhs.top()),
+                  std::max(lhs.right(), rhs.right()),
+                  std::max(lhs.bottom(), rhs.bottom()));
 }
 
-inline
-irect transpose(irect const& rect)
+template<typename T> inline
+trect<T> transpose(trect<T> const& rect)
 {
-  return irect(rect.point(), transpose(rect.size()));
+  return trect<T>(rect.point(), transpose(rect.size()));
 }
 
-inline
-float aspect_ratio(irect const& rect)
+template<typename T> inline
+float aspect_ratio(trect<T> const& rect)
 {
   return static_cast<float>(rect.size().width()) / static_cast<float>(rect.size().height());
 }
+
+using irect = trect<int>;
+using frect = trect<float>;
 
 } // namespace geomcpp
 

@@ -27,24 +27,25 @@
 
 namespace geomcpp {
 
-class isize
+template<typename T>
+class tsize
 {
 public:
-  constexpr isize(int width, int height) : m_width(width), m_height(height) {}
-  explicit constexpr isize(glm::ivec2 const& v) : m_width(v.x), m_height(v.y) {}
-  constexpr isize(isize const& size) = default;
+  constexpr tsize(T width, T height) : m_width(width), m_height(height) {}
+  explicit constexpr tsize<T>(glm::vec<2, T> const& v) : m_width(v.x), m_height(v.y) {}
+  constexpr tsize<T>(tsize<T> const& size) = default;
 
-  constexpr int width() const { return m_width; }
-  constexpr int height() const { return m_height; }
+  constexpr T width() const { return m_width; }
+  constexpr T height() const { return m_height; }
 
-  glm::ivec2 as_vec() const { return glm::ivec2(m_width, m_height); }
+  glm::tvec2<T> as_vec() const { return glm::tvec2<T>(m_width, m_height); }
 
-  constexpr bool operator==(const isize& other) const {
+  constexpr bool operator==(const tsize<T>& other) const {
     return (m_width == other.m_width &&
             m_height == other.m_height);
   }
 
-  constexpr bool operator!=(const isize& other) const {
+  constexpr bool operator!=(const tsize<T>& other) const {
     return !(*this == other);
   }
 
@@ -54,70 +55,73 @@ public:
   }
 
 private:
-  int m_width;
-  int m_height;
+  T m_width;
+  T m_height;
 };
 
-inline
-isize operator*(int s, isize const& size) {
-  return isize(s * size.width(),
-               s * size.height());
+template<typename T> inline
+tsize<T> operator*(T s, tsize<T> const& size) {
+  return tsize<T>(s * size.width(),
+                  s * size.height());
 }
 
-inline
-isize operator*(isize const& size, int s) {
+template<typename T> inline
+tsize<T> operator*(tsize<T> const& size, T s) {
   return s * size;
 }
 
-inline
-int area(isize const& size) {
+template<typename T> inline
+T area(tsize<T> const& size) {
   return size.width() * size.height();
 }
 
-inline
-ipoint anchor_point(isize const& size, Origin origin) {
+template<typename T> inline
+tpoint<T> anchor_point(tsize<T> const& size, Origin origin) {
   switch(origin)
   {
     case Origin::TOP_LEFT:
-      return ipoint(0, 0);
+      return tpoint<T>(0, 0);
 
     case Origin::TOP_CENTER:
-      return ipoint(size.width() / 2, 0);
+      return tpoint<T>(size.width() / 2, 0);
 
     case Origin::TOP_RIGHT:
-      return ipoint(size.width(), 0);
+      return tpoint<T>(size.width(), 0);
 
     case Origin::CENTER_LEFT:
-      return ipoint(0, size.height() / 2);
+      return tpoint<T>(0, size.height() / 2);
 
     case Origin::CENTER:
-      return ipoint(size.width() / 2, size.height() / 2);
+      return tpoint<T>(size.width() / 2, size.height() / 2);
 
     case Origin::CENTER_RIGHT:
-      return ipoint(size.width(), size.height() / 2);
+      return tpoint<T>(size.width(), size.height() / 2);
 
     case Origin::BOTTOM_LEFT:
-      return ipoint(0, size.height());
+      return tpoint<T>(0, size.height());
 
     case Origin::BOTTOM_CENTER:
-      return ipoint(size.width() / 2, size.height());
+      return tpoint<T>(size.width() / 2, size.height());
 
     case Origin::BOTTOM_RIGHT:
-      return ipoint(size.width(), size.height());
+      return tpoint<T>(size.width(), size.height());
   }
 }
 
-inline
-isize transpose(isize const& size)
+template<typename T> inline
+tsize<T> transpose(tsize<T> const& size)
 {
-  return isize(size.height(), size.width());
+  return tsize<T>(size.height(), size.width());
 }
 
-inline
-float aspect_ratio(isize const& size)
+template<typename T> inline
+float aspect_ratio(tsize<T> const& size)
 {
   return static_cast<float>(size.width()) / static_cast<float>(size.height());
 }
+
+using isize = tsize<int>;
+using fsize = tsize<float>;
 
 } // namespace geomcpp
 
