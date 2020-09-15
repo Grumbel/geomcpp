@@ -19,10 +19,7 @@
 
 #include <gtest/gtest.h>
 
-#include <geom/io.hpp>
-#include <geom/point.hpp>
-#include <geom/size.hpp>
-#include <geom/rect.hpp>
+#include <geom/geom.hpp>
 
 using namespace geom;
 
@@ -44,6 +41,16 @@ TEST(frect_test, construction2)
   EXPECT_EQ(value.y(), 34);
   EXPECT_EQ(value.width(), 44);
   EXPECT_EQ(value.height(), 44);
+}
+
+TEST(frect_test, construction3)
+{
+  frect value;
+  EXPECT_EQ(value, frect(0, 0, 0, 0));
+  EXPECT_EQ(value.x(), 0);
+  EXPECT_EQ(value.y(), 0);
+  EXPECT_EQ(value.width(), 0);
+  EXPECT_EQ(value.height(), 0);
 }
 
 TEST(frect_test, conversion)

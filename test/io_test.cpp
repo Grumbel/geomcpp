@@ -20,7 +20,7 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-#include <geom/io.hpp>
+#include <geom/geom.hpp>
 
 using namespace geom;
 

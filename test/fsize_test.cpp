@@ -19,7 +19,7 @@
 
 #include <gtest/gtest.h>
 
-#include <geom/size.hpp>
+#include <geom/geom.hpp>
 
 using namespace geom;
 
@@ -29,6 +29,14 @@ TEST(fsize_test, construction)
   EXPECT_EQ(value, fsize(123, 567));
   EXPECT_EQ(value.width(), 123);
   EXPECT_EQ(value.height(), 567);
+}
+
+TEST(fsize_test, construction2)
+{
+  fsize value;
+  EXPECT_EQ(value, fsize(0, 0));
+  EXPECT_EQ(value.width(), 0);
+  EXPECT_EQ(value.height(), 0);
 }
 
 TEST(fsize_test, conversion)
