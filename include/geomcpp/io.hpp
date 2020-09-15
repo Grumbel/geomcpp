@@ -51,6 +51,29 @@ std::ostream& operator<<(std::ostream& os, irect const& rect) {
             << rect.bottom() << ")";
 }
 
+inline
+std::ostream& operator<<(std::ostream& os, fpoint const& point) {
+  return os << "fpoint("
+            << point.x() << ", "
+            << point.y() << ")";
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, fsize const& size) {
+  return os << "fsize("
+            << size.width() << ", "
+            << size.height() << ")";
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, frect const& rect) {
+  return os << "frect("
+            << rect.left() << ", "
+            << rect.top() << ", "
+            << rect.right() << ", "
+            << rect.bottom() << ")";
+}
+
 } // namespace geomcpp
 
 #endif
