@@ -18,58 +18,46 @@
 // 3. This notice may not be removed or altered from any source distribution.
 
 #include <gtest/gtest.h>
-#include <geomcpp/io.hpp>
-#include <sstream>
+
+#include <geomcpp/size.hpp>
 
 using namespace geomcpp;
 
-TEST(io_test, ipoint)
+TEST(fsize_test, construction)
 {
-  std::ostringstream out;
-  out << ipoint(1, 2);
-  EXPECT_EQ(out.str(), "ipoint(1, 2)");
+  fsize value(123, 567);
+  EXPECT_EQ(value, fsize(123, 567));
+  EXPECT_EQ(value.width(), 123);
+  EXPECT_EQ(value.height(), 567);
 }
 
-TEST(io_test, isize)
+TEST(fsize_test, equality)
 {
-  std::ostringstream out;
-  out << isize(1, 2);
-  EXPECT_EQ(out.str(), "isize(1, 2)");
+  EXPECT_TRUE(fsize(1, 2) == fsize(1, 2));
+  EXPECT_FALSE(fsize(1, 2) == fsize(2, 1));
+  EXPECT_TRUE(fsize(1, 2) != fsize(2, 1));
+  EXPECT_FALSE(fsize(1, 2) != fsize(1, 2));
 }
 
-TEST(io_test, irect)
+TEST(fsize_test, area)
 {
-  std::ostringstream out;
-  out << irect(1, 2, 3, 4);
-  EXPECT_EQ(out.str(), "irect(1, 2, 3, 4)");
+  EXPECT_EQ(area(fsize(123, 567)), 69741);
 }
 
-TEST(io_test, fpoint)
+TEST(fsize_test, multiplication)
 {
-  std::ostringstream out;
-  out << fpoint(1, 2);
-  EXPECT_EQ(out.str(), "fpoint(1, 2)");
+  EXPECT_EQ(fsize(123, 567) * 3.0f, fsize(123*3, 567 * 3.0f));
+  EXPECT_EQ(3.0f * fsize(123, 567), fsize(123*3, 567 * 3.0f));
 }
 
-TEST(io_test, fsize)
+TEST(fsize_test, transpose)
 {
-  std::ostringstream out;
-  out << fsize(1, 2);
-  EXPECT_EQ(out.str(), "fsize(1, 2)");
+  EXPECT_EQ(transpose(fsize(123, 567)), fsize(567, 123));
 }
 
-TEST(io_test, frect)
+TEST(fsize_test, aspect_ratio)
 {
-  std::ostringstream out;
-  out << frect(1, 2, 3, 4);
-  EXPECT_EQ(out.str(), "frect(1, 2, 3, 4)");
-}
-
-TEST(io_test, origin)
-{
-  std::ostringstream out;
-  out << origin::TOP_LEFT;
-  EXPECT_EQ(out.str(), "top-left");
+  EXPECT_FLOAT_EQ(aspect_ratio(fsize(400, 300)), 4.0f / 3.0f);
 }
 
 /* EOF */

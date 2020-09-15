@@ -18,58 +18,37 @@
 // 3. This notice may not be removed or altered from any source distribution.
 
 #include <gtest/gtest.h>
-#include <geomcpp/io.hpp>
-#include <sstream>
+
+#include <geomcpp/size.hpp>
 
 using namespace geomcpp;
 
-TEST(io_test, ipoint)
+TEST(fpoint_test, construction)
 {
-  std::ostringstream out;
-  out << ipoint(1, 2);
-  EXPECT_EQ(out.str(), "ipoint(1, 2)");
+  fpoint value(123, 567);
+  EXPECT_EQ(value, fpoint(123, 567));
+  EXPECT_EQ(value.x(), 123);
+  EXPECT_EQ(value.y(), 567);
 }
 
-TEST(io_test, isize)
+TEST(fpoint_test, equality)
 {
-  std::ostringstream out;
-  out << isize(1, 2);
-  EXPECT_EQ(out.str(), "isize(1, 2)");
+  EXPECT_TRUE(fpoint(1, 2) == fpoint(1, 2));
+  EXPECT_FALSE(fpoint(1, 2) == fpoint(2, 1));
+  EXPECT_TRUE(fpoint(1, 2) != fpoint(2, 1));
+  EXPECT_FALSE(fpoint(1, 2) != fpoint(1, 2));
 }
 
-TEST(io_test, irect)
+TEST(fpoint_test, distance)
 {
-  std::ostringstream out;
-  out << irect(1, 2, 3, 4);
-  EXPECT_EQ(out.str(), "irect(1, 2, 3, 4)");
+  EXPECT_FLOAT_EQ(distance(fpoint(0, 0), fpoint(10, 0)), 10.0f);
+  EXPECT_FLOAT_EQ(distance(fpoint(10, 10), fpoint(20, 20)), 14.142135623730951f);
 }
 
-TEST(io_test, fpoint)
+TEST(fpoint_test, transpose)
 {
-  std::ostringstream out;
-  out << fpoint(1, 2);
-  EXPECT_EQ(out.str(), "fpoint(1, 2)");
-}
-
-TEST(io_test, fsize)
-{
-  std::ostringstream out;
-  out << fsize(1, 2);
-  EXPECT_EQ(out.str(), "fsize(1, 2)");
-}
-
-TEST(io_test, frect)
-{
-  std::ostringstream out;
-  out << frect(1, 2, 3, 4);
-  EXPECT_EQ(out.str(), "frect(1, 2, 3, 4)");
-}
-
-TEST(io_test, origin)
-{
-  std::ostringstream out;
-  out << origin::TOP_LEFT;
-  EXPECT_EQ(out.str(), "top-left");
+  EXPECT_EQ(transpose(fpoint(4, 3)), fpoint(3, 4));
+  EXPECT_EQ(transpose(fpoint(123, 456)), fpoint(456, 123));
 }
 
 /* EOF */
