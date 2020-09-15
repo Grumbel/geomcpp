@@ -25,6 +25,8 @@
 #include <glm/glm.hpp>
 
 #include "origin.hpp"
+#include "point.hpp"
+#include "size.hpp"
 
 namespace geom {
 
