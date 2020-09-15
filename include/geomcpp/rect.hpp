@@ -46,10 +46,10 @@ public:
     m_size(tsize<T>(rect.size()))
   {}
 
-  constexpr tpoint<T> lt() const { return m_point; }
-  constexpr tpoint<T> rb() const { return tpoint<T>(right(), bottom()); }
-  constexpr tpoint<T> rt() const { return tpoint<T>(right(), top()); }
-  constexpr tpoint<T> lb() const { return tpoint<T>(left(), bottom()); }
+  constexpr tpoint<T> topleft() const { return m_point; }
+  constexpr tpoint<T> topright() const { return tpoint<T>(right(), top()); }
+  constexpr tpoint<T> bottomleft() const { return tpoint<T>(left(), bottom()); }
+  constexpr tpoint<T> bottomright() const { return tpoint<T>(right(), bottom()); }
 
   constexpr tpoint<T> point() const { return m_point; }
   constexpr tsize<T> size() const { return m_size; }
