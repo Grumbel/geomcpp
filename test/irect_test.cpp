@@ -28,22 +28,22 @@ using namespace geomcpp;
 
 TEST(irect_test, construction1)
 {
-    irect value(ipoint(12, 34), isize(56, 78));
-    EXPECT_EQ(value, irect(ipoint(12, 34), isize(56, 78)));
-    EXPECT_EQ(value.x(), 12);
-    EXPECT_EQ(value.y(), 34);
-    EXPECT_EQ(value.width(), 56);
-    EXPECT_EQ(value.height(), 78);
+  irect value(ipoint(12, 34), isize(56, 78));
+  EXPECT_EQ(value, irect(ipoint(12, 34), isize(56, 78)));
+  EXPECT_EQ(value.x(), 12);
+  EXPECT_EQ(value.y(), 34);
+  EXPECT_EQ(value.width(), 56);
+  EXPECT_EQ(value.height(), 78);
 }
 
 TEST(irect_test, construction2)
 {
-    irect value(12, 34, 56, 78);
-    EXPECT_EQ(value, irect(ipoint(12, 34), isize(44, 44)));
-    EXPECT_EQ(value.x(), 12);
-    EXPECT_EQ(value.y(), 34);
-    EXPECT_EQ(value.width(), 44);
-    EXPECT_EQ(value.height(), 44);
+  irect value(12, 34, 56, 78);
+  EXPECT_EQ(value, irect(ipoint(12, 34), isize(44, 44)));
+  EXPECT_EQ(value.x(), 12);
+  EXPECT_EQ(value.y(), 34);
+  EXPECT_EQ(value.width(), 44);
+  EXPECT_EQ(value.height(), 44);
 }
 
 TEST(irect_test, equality)
@@ -71,12 +71,12 @@ TEST(irect_test, intersection)
 
 TEST(irect_test, overlapping)
 {
-  EXPECT_TRUE(overlapping(irect(0, 0, 123, 567),
-                          irect(10, 20, 50, 60)));
-  EXPECT_TRUE(overlapping(irect(0, 0, 123, 567),
-                          irect(0, 0, 50, 60)));
-  EXPECT_FALSE(overlapping(irect(0, 0, 123, 567),
-                           irect(-500, -500, -50, -60)));
+  EXPECT_TRUE(intersects(irect(0, 0, 123, 567),
+                         irect(10, 20, 50, 60)));
+  EXPECT_TRUE(intersects(irect(0, 0, 123, 567),
+                         irect(0, 0, 50, 60)));
+  EXPECT_FALSE(intersects(irect(0, 0, 123, 567),
+                          irect(-500, -500, -50, -60)));
 }
 
 TEST(irect_test, contains)
@@ -85,12 +85,38 @@ TEST(irect_test, contains)
   EXPECT_FALSE(contains(irect(10, 20, 30, 40), ipoint(-15, -19)));
 }
 
-TEST(irect_test, normalized)
+TEST(irect_test, normalize)
 {
-  EXPECT_EQ(normalized(irect(10, 20, -30, -40)),
+  EXPECT_EQ(normalize(irect(10, 20, -30, -40)),
             irect(-30, -40, 10, 20));
-  EXPECT_EQ(normalized(irect(10, 20, 30, -40)),
-              irect(10, -40, 30, 20));
+  EXPECT_EQ(normalize(irect(10, 20, 30, -40)),
+            irect(10, -40, 30, 20));
+}
+
+TEST(irect_test, unite)
+{
+  EXPECT_EQ(unite(irect(0, 0, 10, 20),
+                  irect(30, 40, 50, 70)),
+            irect(0, 0, 50, 70));
+  EXPECT_EQ(unite(irect(30, 40, 50, 70),
+                  irect(0, 0, 10, 20)),
+            irect(0, 0, 50, 70));
+}
+
+TEST(irect_test, transpose)
+{
+  EXPECT_EQ(transpose(irect(ipoint(0, 0), isize(10, 20))),
+            irect(ipoint(0, 0), isize(20, 10)));
+  EXPECT_EQ(transpose(irect(ipoint(35, 24), isize(10, 20))),
+            irect(ipoint(35, 24), isize(20, 10)));
+}
+
+TEST(irect_test, aspect_ratio)
+{
+  EXPECT_FLOAT_EQ(aspect_ratio(irect(ipoint(0, 0), isize(400, 300))),
+                  4.0f / 3.0f);
+  EXPECT_FLOAT_EQ(aspect_ratio(irect(ipoint(50, 60), isize(1600, 900))),
+                  16.0f / 9.0f);
 }
 
 /* EOF */

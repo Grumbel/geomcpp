@@ -107,6 +107,18 @@ ipoint anchor_point(isize const& size, Origin origin) {
   }
 }
 
+inline
+isize transpose(isize const& size)
+{
+  return isize(size.height(), size.width());
+}
+
+inline
+float aspect_ratio(isize const& size)
+{
+  return static_cast<float>(size.width()) / static_cast<float>(size.height());
+}
+
 } // namespace geomcpp
 
 #endif

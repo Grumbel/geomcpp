@@ -50,4 +50,14 @@ TEST(isize_test, multiplication)
   EXPECT_EQ(3 * isize(123, 567), isize(123*3, 567*3));
 }
 
+TEST(isize_test, transpose)
+{
+  EXPECT_EQ(transpose(isize(123, 567)), isize(567, 123));
+}
+
+TEST(isize_test, aspect_ratio)
+{
+  EXPECT_FLOAT_EQ(aspect_ratio(isize(400, 300)), 4.0f / 3.0f);
+}
+
 /* EOF */

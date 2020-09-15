@@ -61,6 +61,12 @@ float distance(ipoint const& lhs, ipoint const& rhs)
   return sqrtf(a * a + b * b);
 }
 
+inline
+ipoint transpose(ipoint const point)
+{
+  return ipoint(point.y(), point.x());
+}
+
 } // namespace geomcpp
 
 #endif

@@ -44,6 +44,7 @@ public:
   constexpr ipoint rt() const { return ipoint(right(), top()); }
   constexpr ipoint lb() const { return ipoint(left(), bottom()); }
 
+  constexpr ipoint point() const { return m_point; }
   constexpr isize size() const { return m_size; }
 
   constexpr int left() const { return m_point.x(); }
@@ -108,7 +109,7 @@ irect intersection(irect const& lhs, irect const& rhs) {
 }
 
 inline
-bool overlapping(irect const& lhs, irect const& rhs) {
+bool intersects(irect const& lhs, irect const& rhs) {
   return static_cast<bool>(intersection(lhs, rhs));
 }
 
@@ -121,7 +122,7 @@ bool contains(irect const& rect, ipoint const& point) {
 }
 
 inline
-irect normalized(irect const& rect) {
+irect normalize(irect const& rect) {
   return irect(std::min(rect.left(), rect.right()),
                std::min(rect.top(), rect.bottom()),
                std::max(rect.left(), rect.right()),
@@ -151,6 +152,28 @@ inline
 irect anchored(irect const& rect, Origin origin) {
   return irect(anchor_point(rect.size(), origin),
                rect.size());
+}
+
+/** Create a rectangle that contain boths lhs and rhs */
+inline
+irect unite(irect const& lhs, irect const& rhs)
+{
+  return irect(std::min(lhs.left(), rhs.left()),
+               std::min(lhs.top(), rhs.top()),
+               std::max(lhs.right(), rhs.right()),
+               std::max(lhs.bottom(), rhs.bottom()));
+}
+
+inline
+irect transpose(irect const& rect)
+{
+  return irect(rect.point(), transpose(rect.size()));
+}
+
+inline
+float aspect_ratio(irect const& rect)
+{
+  return static_cast<float>(rect.size().width()) / static_cast<float>(rect.size().height());
 }
 
 } // namespace geomcpp

@@ -45,4 +45,10 @@ TEST(ipoint_test, distance)
   EXPECT_FLOAT_EQ(distance(ipoint(10, 10), ipoint(20, 20)), 14.142135623730951f);
 }
 
+TEST(ipoint_test, transpose)
+{
+  EXPECT_EQ(transpose(ipoint(4, 3)), ipoint(3, 4));
+  EXPECT_EQ(transpose(ipoint(123, 456)), ipoint(456, 123));
+}
+
 /* EOF */
