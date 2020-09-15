@@ -22,9 +22,9 @@
 
 #include <ostream>
 
-#include "ipoint.hpp"
-#include "isize.hpp"
-#include "irect.hpp"
+#include "point.hpp"
+#include "size.hpp"
+#include "rect.hpp"
 
 namespace geomcpp {
 

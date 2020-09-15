@@ -20,9 +20,9 @@
 #include <gtest/gtest.h>
 
 #include <geomcpp/io.hpp>
-#include <geomcpp/ipoint.hpp>
-#include <geomcpp/isize.hpp>
-#include <geomcpp/irect.hpp>
+#include <geomcpp/point.hpp>
+#include <geomcpp/size.hpp>
+#include <geomcpp/rect.hpp>
 
 using namespace geomcpp;
 

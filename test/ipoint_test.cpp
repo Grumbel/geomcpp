@@ -19,7 +19,7 @@
 
 #include <gtest/gtest.h>
 
-#include <geomcpp/isize.hpp>
+#include <geomcpp/size.hpp>
 
 using namespace geomcpp;
 

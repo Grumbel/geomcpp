@@ -22,7 +22,7 @@
 
 #include <glm/glm.hpp>
 
-#include "ipoint.hpp"
+#include "point.hpp"
 #include "origin.hpp"
 
 namespace geomcpp {
