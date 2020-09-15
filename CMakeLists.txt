@@ -30,7 +30,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(glm REQUIRED)
+if(NOT TARGET glm::glm)
+  find_package(glm REQUIRED)
+endif()
 
 add_library(geomcpp INTERFACE)
 target_include_directories(geomcpp INTERFACE include/)
