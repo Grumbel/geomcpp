@@ -37,10 +37,21 @@ endif()
 add_library(geomcpp INTERFACE)
 target_include_directories(geomcpp INTERFACE include/)
 target_link_libraries(geomcpp INTERFACE glm::glm)
+file(GLOB GEOMCPP_HEADER_SOURCES "include/geom/*.hpp")
 set_target_properties(geomcpp PROPERTIES PUBLIC_HEADER
-  "include/ipoint.hpp"
-  "include/isize.hpp"
-  "include/irect.hpp")
+  "${GEOMCPP_HEADER_SOURCES}")
+
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/geomcpp.pc.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
+  @ONLY)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+
+install(TARGETS geomcpp
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/geom/")
 
 if(BUILD_TESTS)
   enable_testing()

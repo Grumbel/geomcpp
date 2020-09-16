@@ -43,6 +43,7 @@ before_script:
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DWARNINGS=ON -DWERROR=ON -DBUILD_TESTS=ON
     - make -k VERBOSE=1
     - make test VERBOSE=1 ARGS="-V"
+    - make install
 
 build:gcc:release:
   <<: *build_geomcpp
