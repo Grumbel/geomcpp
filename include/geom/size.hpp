@@ -20,6 +20,8 @@
 #ifndef HEADER_GEOMCPP_SIZE_HPP
 #define HEADER_GEOMCPP_SIZE_HPP
 
+#include <stdexcept>
+
 #define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 
@@ -119,6 +121,9 @@ tpoint<T> anchor_point(tsize<T> const& size, origin origin) {
 
     case origin::BOTTOM_RIGHT:
       return tpoint<T>(size.width(), size.height());
+
+    default:
+      throw std::invalid_argument("invalid value for origin");
   }
 }
 
