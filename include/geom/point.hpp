@@ -24,6 +24,9 @@
 #define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 
+#include "fwd.hpp"
+#include "size.hpp"
+
 namespace geom {
 
 template<typename T>
@@ -61,6 +64,20 @@ private:
   T m_x;
   T m_y;
 };
+
+template<typename T> inline
+tpoint<T> operator+(tpoint<T> const& point, tsize<T> const& size)
+{
+  return tpoint<T>(point.x() + size.width(),
+                   point.y() + size.height());
+}
+
+template<typename T> inline
+tpoint<T> operator-(tpoint<T> const& point, tsize<T> const& size)
+{
+  return tpoint<T>(point.x() - size.width(),
+                   point.y() - size.height());
+}
 
 template<typename T> inline
 float distance(tpoint<T> const& lhs, tpoint<T> const& rhs)

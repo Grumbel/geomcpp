@@ -64,4 +64,9 @@ TEST(fpoint_test, transpose)
   EXPECT_EQ(transpose(fpoint(123, 456)), fpoint(456, 123));
 }
 
+TEST(fpoint_test, addition)
+{
+  EXPECT_EQ(fpoint(1, 2) + fsize(5, 6), fpoint(6, 8));
+}
+
 /* EOF */
