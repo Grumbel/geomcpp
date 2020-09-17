@@ -128,6 +128,13 @@ tpoint<T> transpose(tpoint<T> const point)
   return tpoint<T>(point.y(), point.x());
 }
 
+template<typename T> inline
+tpoint<T> interpolate(tpoint<T> const lhs, tpoint<T> const rhs, float alpha)
+{
+  return tpoint<T>(static_cast<T>(static_cast<float>(lhs.x()) * (1.0f - alpha) + static_cast<float>(rhs.x()) * alpha),
+                   static_cast<T>(static_cast<float>(lhs.y()) * (1.0f - alpha) + static_cast<float>(rhs.y()) * alpha));
+}
+
 using ipoint = tpoint<int>;
 using fpoint = tpoint<float>;
 

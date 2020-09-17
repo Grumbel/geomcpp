@@ -97,4 +97,12 @@ TYPED_TEST(tpoint_test, addition)
   EXPECT_EQ(point(1, 2) + size(5, 6), point(6, 8));
 }
 
+TYPED_TEST(tpoint_test, interpolate)
+{
+  using point = tpoint<TypeParam>;
+
+  EXPECT_EQ(interpolate(point(10, 30), point(30, 0), 0.5f),
+            point(20, 15));
+}
+
 /* EOF */
