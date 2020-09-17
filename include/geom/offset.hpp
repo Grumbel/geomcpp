@@ -57,6 +57,34 @@ public:
     return !(*this == other);
   }
 
+  toffset<T> operator-() const {
+    return toffset<T>(-m_x, -m_y);
+  }
+
+  toffset<T>& operator+=(toffset<T> const& other) {
+    m_x += other.x();
+    m_y += other.y();
+    return *this;
+  }
+
+  toffset<T>& operator-=(toffset<T> const& other) {
+    m_x -= other.x();
+    m_y -= other.y();
+    return *this;
+  }
+
+  toffset<T>& operator*=(T s) {
+    m_x *= s;
+    m_y *= s;
+    return *this;
+  }
+
+  toffset<T>& operator/=(T s) {
+    m_x /= s;
+    m_y /= s;
+    return *this;
+  }
+
   glm::vec<2, T> as_vec() const { return glm::vec<2, T>(m_x, m_y); }
 
 private:
@@ -71,17 +99,6 @@ toffset<T> transpose(toffset<T> const offset)
 }
 
 template<typename T> inline
-toffset<T> operator*(T s, toffset<T> const& offset) {
-  return toffset<T>(s * offset.x(),
-                    s * offset.y());
-}
-
-template<typename T> inline
-toffset<T> operator*(toffset<T> const& size, T s) {
-  return s * size;
-}
-
-template<typename T> inline
 toffset<T> operator+(toffset<T> const& lhs, toffset<T> const& rhs) {
   return toffset<T>(lhs.x() + rhs.x(),
                     lhs.y() + rhs.y());
@@ -91,6 +108,18 @@ template<typename T> inline
 toffset<T> operator-(toffset<T> const& lhs, toffset<T> const& rhs) {
   return toffset<T>(lhs.x() - rhs.x(),
                     lhs.y() - rhs.y());
+}
+
+template<typename T> inline
+toffset<T> operator*(T s, toffset<T> const& offset) {
+  return toffset<T>(s * offset.x(),
+                    s * offset.y());
+}
+
+template<typename T> inline
+toffset<T> operator*(toffset<T> const& offset, T s) {
+  return toffset<T>(offset.x() * s,
+                    offset.y() * s);
 }
 
 template<typename T> inline
