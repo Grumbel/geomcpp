@@ -26,6 +26,7 @@
 
 #include "fwd.hpp"
 #include "size.hpp"
+#include "offset.hpp"
 
 namespace geom {
 
@@ -60,6 +61,27 @@ public:
 
   glm::vec<2, T> as_vec() const { return glm::vec<2, T>(m_x, m_y); }
 
+  tpoint<T>& operator+=(toffset<T> const& offset)
+  {
+    m_x += offset.x();
+    m_y += offset.y();
+    return *this;
+  }
+
+  tpoint<T>& operator-=(toffset<T> const& offset)
+  {
+    m_x -= offset.x();
+    m_y -= offset.y();
+    return *this;
+  }
+
+  tpoint<T>& operator+=(tsize<T> const& size)
+  {
+    m_x += size.width();
+    m_y += size.height();
+    return *this;
+  }
+
 private:
   T m_x;
   T m_y;
@@ -77,6 +99,20 @@ tpoint<T> operator-(tpoint<T> const& point, tsize<T> const& size)
 {
   return tpoint<T>(point.x() - size.width(),
                    point.y() - size.height());
+}
+
+template<typename T> inline
+tpoint<T> operator+(tpoint<T> const& point, toffset<T> const& offset)
+{
+  return tpoint<T>(point.x() + offset.x(),
+                   point.y() + offset.y());
+}
+
+template<typename T> inline
+tpoint<T> operator-(tpoint<T> const& point, toffset<T> const& offset)
+{
+  return tpoint<T>(point.x() - offset.x(),
+                   point.y() - offset.y());
 }
 
 template<typename T> inline

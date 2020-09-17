@@ -28,6 +28,11 @@ using ipoint = tpoint<int>;
 using fpoint = tpoint<float>;
 
 template<typename T>
+class toffset;
+using ioffset = toffset<int>;
+using foffset = toffset<float>;
+
+template<typename T>
 class tsize;
 using isize = tsize<int>;
 using fsize = tsize<float>;

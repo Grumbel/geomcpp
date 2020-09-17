@@ -22,6 +22,7 @@
 
 #include "io.hpp"
 #include "point.hpp"
+#include "offset.hpp"
 #include "size.hpp"
 #include "rect.hpp"
 #include "origin.hpp"
