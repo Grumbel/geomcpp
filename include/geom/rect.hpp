@@ -17,8 +17,8 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
-#ifndef HEADER_GEOMCPP_IRECT_HPP
-#define HEADER_GEOMCPP_IRECT_HPP
+#ifndef HEADER_GEOMCPP_RECT_HPP
+#define HEADER_GEOMCPP_RECT_HPP
 
 #include <algorithm>
 #include <math.h>

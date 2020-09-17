@@ -17,8 +17,8 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
-#ifndef HEADER_GEOMCPP_IPOINT_HPP
-#define HEADER_GEOMCPP_IPOINT_HPP
+#ifndef HEADER_GEOMCPP_POINT_HPP
+#define HEADER_GEOMCPP_POINT_HPP
 
 #include <math.h>
 #define GLM_FORCE_CTOR_INIT
