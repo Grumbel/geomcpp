@@ -21,7 +21,6 @@
 #define HEADER_GEOMCPP_OFFSET_HPP
 
 #include <math.h>
-#define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 
 #include "fwd.hpp"

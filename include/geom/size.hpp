@@ -22,7 +22,6 @@
 
 #include <stdexcept>
 
-#define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 
 #include "point.hpp"
