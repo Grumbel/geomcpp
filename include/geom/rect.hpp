@@ -24,6 +24,7 @@
 #include <math.h>
 #include <glm/glm.hpp>
 
+#include "offset.hpp"
 #include "origin.hpp"
 #include "point.hpp"
 #include "size.hpp"
@@ -79,6 +80,18 @@ public:
     return !((*this) == other);
   }
 
+  trect<T>& operator+=(toffset<T> const& offset)
+  {
+    m_point = m_point + offset;
+    return *this;
+  }
+
+  trect<T>& operator-=(toffset<T> const& offset)
+  {
+    m_point = m_point - offset;
+    return *this;
+  }
+
   constexpr explicit operator bool() const {
     return (m_size.width() >=0 &&
             m_size.height() >=0);
@@ -88,6 +101,20 @@ private:
   tpoint<T> m_point;
   tsize<T> m_size;
 };
+
+template<typename T> inline
+trect<T> operator+(trect<T> const& rect, toffset<T> const& offset)
+{
+  return trect<T>(rect.point() + offset,
+                  rect.size());
+}
+
+template<typename T> inline
+trect<T> operator-(trect<T> const& rect, toffset<T> const& offset)
+{
+  return trect<T>(rect.point() - offset,
+                  rect.size());
+}
 
 template<typename T> inline
 int area(trect<T> const& rect) {

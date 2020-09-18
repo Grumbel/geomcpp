@@ -92,6 +92,19 @@ TYPED_TEST(trect_test, equality)
   EXPECT_FALSE(rect(1, 2, 3, 4) != rect(1, 2, 3, 4));
 }
 
+TYPED_TEST(trect_test, addition)
+{
+  using rect = trect<TypeParam>;
+  using offset = toffset<TypeParam>;
+
+  EXPECT_EQ(rect(0, 0, 44, 33) + offset(6, 7), rect(6, 7, 50, 40));
+  EXPECT_EQ(rect(0, 0, 44, 33) - offset(6, 7), rect(-6, -7, 38, 26));
+
+  rect r(0, 0, 44, 33);
+  EXPECT_EQ(r += offset(6, 7), rect(6, 7, 50, 40));
+  EXPECT_EQ(r -= offset(6, 7), rect(-0, 0, 44, 33));
+}
+
 TYPED_TEST(trect_test, grow)
 {
   using rect = trect<TypeParam>;
