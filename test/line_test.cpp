@@ -17,36 +17,16 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
-#ifndef HEADER_GEOMCPP_FWD_HPP
-#define HEADER_GEOMCPP_FWD_HPP
+#include <gtest/gtest.h>
 
-namespace geom {
+#include <geom/line.hpp>
 
-template<typename T>
-class tpoint;
-using ipoint = tpoint<int>;
-using fpoint = tpoint<float>;
+using namespace geom;
 
-template<typename T>
-class toffset;
-using ioffset = toffset<int>;
-using foffset = toffset<float>;
-
-template<typename T>
-class tsize;
-using isize = tsize<int>;
-using fsize = tsize<float>;
-
-template<typename T>
-class trect;
-using irect = trect<int>;
-using frect = trect<float>;
-
-class line;
-class quad;
-
-} // namespace geom
-
-#endif
+TEST(LineTest, length)
+{
+  line line({0.0f, 0.0f}, {10.0f, 10.0f});
+  EXPECT_EQ(line.length(), 10.0f);
+}
 
 /* EOF */

@@ -16,29 +16,31 @@
 **  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "math/line.hpp"
+#include "line.hpp"
 
-Line::Line(const glm::vec2& p1_,
+namespace geom {
+
+line::line(const glm::vec2& p1_,
            const glm::vec2& p2_)
   : p1(p1_), p2(p2_)
 {
 }
 
 float
-Line::length() const
+line::length() const
 {
   return glm::length(p2 - p1);
 }
 
 bool
-Line::intersect(const Line& line_b) const
+line::intersect(const line& line_b) const
 {
   float ua, ub;
   return intersect(line_b, ua, ub);
 }
 
 bool
-Line::intersect(const Line& line, float& ua, float& ub) const
+line::intersect(const line& line, float& ua, float& ub) const
 {
   const float& x1 = p1.x;
   const float& y1 = p1.y;
@@ -69,7 +71,7 @@ Line::intersect(const Line& line, float& ua, float& ub) const
 }
 
 bool
-Line::intersect(const Line& line, glm::vec2& colpos) const
+line::intersect(const line& line, glm::vec2& colpos) const
 {
   float ua, ub;
   if (intersect(line, ua, ub))
@@ -84,7 +86,7 @@ Line::intersect(const Line& line, glm::vec2& colpos) const
 }
 
 float
-Line::distance(const glm::vec2& p3) const
+line::distance(const glm::vec2& p3) const
 {
   const float& x1 = p1.x;
   const float& y1 = p1.y;
@@ -115,5 +117,7 @@ Line::distance(const glm::vec2& p3) const
     return glm::length(p4 - p3);
   }
 }
+
+} // namespace geom
 
 /* EOF */

@@ -17,36 +17,27 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 
-#ifndef HEADER_GEOMCPP_FWD_HPP
-#define HEADER_GEOMCPP_FWD_HPP
+#include <gtest/gtest.h>
 
-namespace geom {
+#include <geom/quad.hpp>
 
-template<typename T>
-class tpoint;
-using ipoint = tpoint<int>;
-using fpoint = tpoint<float>;
+using namespace geom;
 
-template<typename T>
-class toffset;
-using ioffset = toffset<int>;
-using foffset = toffset<float>;
+TEST(QuadTest, construct)
+{
+  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+}
 
-template<typename T>
-class tsize;
-using isize = tsize<int>;
-using fsize = tsize<float>;
+TEST(QuadTest, get_bounding_box)
+{
+  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+  quad.get_bounding_box();
+}
 
-template<typename T>
-class trect;
-using irect = trect<int>;
-using frect = trect<float>;
-
-class line;
-class quad;
-
-} // namespace geom
-
-#endif
+TEST(QuadTest, rotate)
+{
+  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+  quad.rotate(45.0f);
+}
 
 /* EOF */
