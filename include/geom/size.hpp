@@ -58,9 +58,16 @@ public:
     return !(*this == other);
   }
 
-  constexpr explicit operator bool() const {
-    return (m_width >= 0 &&
-            m_height >= 0);
+  bool is_valid() const {
+    return m_width >= 0 && m_height >= 0;
+  }
+
+  bool is_null() const {
+    return m_width == 0 && m_height == 0;
+  }
+
+  bool is_empty() const {
+    return m_width <= 0 || m_height <= 0;
   }
 
 private:

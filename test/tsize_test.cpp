@@ -102,4 +102,37 @@ TYPED_TEST(tsize_test, aspect_ratio)
   EXPECT_FLOAT_EQ(aspect_ratio(size(400, 300)), 4.0f / 3.0f);
 }
 
+TYPED_TEST(tsize_test, is_valid)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_TRUE(size(0, 0).is_valid());
+  EXPECT_TRUE(size(1, 1).is_valid());
+  EXPECT_FALSE(size(-1, 1).is_valid());
+  EXPECT_FALSE(size(1, -1).is_valid());
+  EXPECT_FALSE(size(-1, -1).is_valid());
+}
+
+TYPED_TEST(tsize_test, is_empty)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_TRUE(size(0, 0).is_empty());
+  EXPECT_FALSE(size(1, 1).is_empty());
+  EXPECT_TRUE(size(-1, 1).is_empty());
+  EXPECT_TRUE(size(1, -1).is_empty());
+  EXPECT_TRUE(size(-1, -1).is_empty());
+}
+
+TYPED_TEST(tsize_test, is_null)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_TRUE(size(0, 0).is_null());
+  EXPECT_FALSE(size(1, 1).is_null());
+  EXPECT_FALSE(size(-1, 1).is_null());
+  EXPECT_FALSE(size(1, -1).is_null());
+  EXPECT_FALSE(size(-1, -1).is_null());
+}
+
 /* EOF */
