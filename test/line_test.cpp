@@ -25,8 +25,8 @@ using namespace geom;
 
 TEST(LineTest, length)
 {
-  line line({0.0f, 0.0f}, {10.0f, 10.0f});
-  EXPECT_EQ(line.length(), 10.0f);
+  line line({0.0f, 0.0f}, {30.0f, 40.0f});
+  EXPECT_FLOAT_EQ(line.length(), 50.0f);
 }
 
 /* EOF */
