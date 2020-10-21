@@ -135,4 +135,17 @@ TYPED_TEST(tsize_test, is_null)
   EXPECT_FALSE(size(-1, -1).is_null());
 }
 
+TYPED_TEST(tsize_test, contains)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_FALSE(contains(size(0, 0), size(10, 20)));
+  EXPECT_TRUE(contains(size(0, 0), size(0, 0)));
+  EXPECT_TRUE(contains(size(10, 20), size(5, 10)));
+  EXPECT_FALSE(contains(size(10, 20), size(15, 10)));
+  EXPECT_TRUE(contains(size(20, 10), size(15, 10)));
+  EXPECT_TRUE(contains(size(20, 10), size(0, 0)));
+  EXPECT_FALSE(contains(size(20, 10), size(0, 20)));
+}
+
 /* EOF */

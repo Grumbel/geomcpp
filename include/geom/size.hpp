@@ -145,6 +145,13 @@ float aspect_ratio(tsize<T> const& size)
   return static_cast<float>(size.width()) / static_cast<float>(size.height());
 }
 
+template<typename T> inline
+bool contains(tsize<T> const& parent, tsize<T> const& child)
+{
+  return (parent.width() >= child.width() &&
+          parent.height() >= child.height());
+}
+
 using isize = tsize<int>;
 using fsize = tsize<float>;
 
