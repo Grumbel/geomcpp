@@ -152,6 +152,13 @@ bool contains(tsize<T> const& parent, tsize<T> const& child)
           parent.height() >= child.height());
 }
 
+template<typename T> inline
+bool contains(tsize<T> const& parent, tpoint<T> const& point)
+{
+  return (0 <= point.x() && point.x() < parent.width() &&
+          0 <= point.y() && point.y() < parent.height());
+}
+
 using isize = tsize<int>;
 using fsize = tsize<float>;
 

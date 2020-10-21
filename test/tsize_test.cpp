@@ -135,7 +135,7 @@ TYPED_TEST(tsize_test, is_null)
   EXPECT_FALSE(size(-1, -1).is_null());
 }
 
-TYPED_TEST(tsize_test, contains)
+TYPED_TEST(tsize_test, contains_size)
 {
   using size = tsize<TypeParam>;
 
@@ -146,6 +146,20 @@ TYPED_TEST(tsize_test, contains)
   EXPECT_TRUE(contains(size(20, 10), size(15, 10)));
   EXPECT_TRUE(contains(size(20, 10), size(0, 0)));
   EXPECT_FALSE(contains(size(20, 10), size(0, 20)));
+}
+
+TYPED_TEST(tsize_test, contains_point)
+{
+  using size = tsize<TypeParam>;
+  using point = tpoint<TypeParam>;
+
+  EXPECT_FALSE(contains(size(0, 0), point(10, 20)));
+  EXPECT_FALSE(contains(size(0, 0), point(0, 0)));
+  EXPECT_TRUE(contains(size(10, 20), point(5, 10)));
+  EXPECT_FALSE(contains(size(10, 20), point(15, 10)));
+  EXPECT_FALSE(contains(size(20, 10), point(15, 10)));
+  EXPECT_TRUE(contains(size(20, 10), point(0, 0)));
+  EXPECT_FALSE(contains(size(20, 10), point(0, 20)));
 }
 
 /* EOF */
