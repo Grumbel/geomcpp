@@ -30,67 +30,70 @@
 
 namespace geom {
 
-class quad
+template<typename T>
+class tquad
 {
 public:
-  glm::vec2 p1;
-  glm::vec2 p2;
-  glm::vec2 p3;
-  glm::vec2 p4;
-
-  quad()
-    : p1(),
-      p2(),
-      p3(),
-      p4()
+  tquad() :
+    p1(),
+    p2(),
+    p3(),
+    p4()
   {}
 
-  quad(const geom::frect& rect)
-    : p1(rect.left(), rect.top()),
-      p2(rect.right(), rect.top()),
-      p3(rect.right(), rect.bottom()),
-      p4(rect.left(), rect.bottom())
+  tquad(const geom::frect& rect) :
+    p1(rect.left(), rect.top()),
+    p2(rect.right(), rect.top()),
+    p3(rect.right(), rect.bottom()),
+    p4(rect.left(), rect.bottom())
   {}
 
-  quad(float x1, float y1,
-       float x2, float y2)
-    : p1(x1, y1),
-      p2(x2, y1),
-      p3(x2, y2),
-      p4(x1, y2)
+  tquad(float x1, float y1,
+       float x2, float y2) :
+    p1(x1, y1),
+    p2(x2, y1),
+    p3(x2, y2),
+    p4(x1, y2)
   {}
 
-  quad(const glm::vec2& p1_,
-       const glm::vec2& p2_,
-       const glm::vec2& p3_,
-       const glm::vec2& p4_)
-    : p1(p1_),
-      p2(p2_),
-      p3(p3_),
-      p4(p4_)
+  tquad(tpoint<T> const& p1_,
+        tpoint<T> const& p2_,
+        tpoint<T> const& p3_,
+        tpoint<T> const& p4_) :
+    p1(p1_),
+    p2(p2_),
+    p3(p3_),
+    p4(p4_)
   {}
 
-  geom::frect get_bounding_box() const
+  geom::trect<T> get_bounding_box() const
   {
-    return geom::frect(std::min(std::min(std::min(p1.x, p2.x), p3.x), p4.x),
-                 std::min(std::min(std::min(p1.y, p2.y), p3.y), p4.y),
-                 std::max(std::max(std::max(p1.x, p2.x), p3.x), p4.x),
-                 std::max(std::max(std::max(p1.y, p2.y), p3.y), p4.y));
+    return geom::trect<T>(std::min(std::min(std::min(p1.x(), p2.x()), p3.x()), p4.x()),
+                          std::min(std::min(std::min(p1.y(), p2.y()), p3.y()), p4.y()),
+                          std::max(std::max(std::max(p1.x(), p2.x()), p3.x()), p4.x()),
+                          std::max(std::max(std::max(p1.y(), p2.y()), p3.y()), p4.y()));
   }
 
   void rotate(float rad)
   {
-    glm::vec2 center((p1.x + p2.x + p3.x + p4.x) / 4.0f,
-                    (p1.y + p2.y + p3.y + p4.y) / 4.0f);
+    glm::vec2 center(static_cast<float>(p1.x() + p2.x() + p3.x() + p4.x()) / 4.0f,
+                     static_cast<float>(p1.y() + p2.y() + p3.y() + p4.y()) / 4.0f);
 
-    p1 = center + glm::rotate(p1 - center, rad);
-    p2 = center + glm::rotate(p2 - center, rad);
-    p3 = center + glm::rotate(p3 - center, rad);
-    p4 = center + glm::rotate(p4 - center, rad);
+    p1 = glm::tvec2<T>(center + glm::rotate(glm::vec2(p1.as_vec()) - center, rad));
+    p2 = glm::tvec2<T>(center + glm::rotate(glm::vec2(p2.as_vec()) - center, rad));
+    p3 = glm::tvec2<T>(center + glm::rotate(glm::vec2(p3.as_vec()) - center, rad));
+    p4 = glm::tvec2<T>(center + glm::rotate(glm::vec2(p4.as_vec()) - center, rad));
   }
+
+public:
+  tpoint<T> p1;
+  tpoint<T> p2;
+  tpoint<T> p3;
+  tpoint<T> p4;
 };
 
-using fquad = quad;
+using iquad = tquad<int>;
+using fquad = tquad<float>;
 
 } // namespace geom
 

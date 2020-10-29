@@ -25,18 +25,18 @@ using namespace geom;
 
 TEST(QuadTest, construct)
 {
-  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+  iquad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
 }
 
 TEST(QuadTest, get_bounding_box)
 {
-  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+  iquad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
   quad.get_bounding_box();
 }
 
 TEST(QuadTest, rotate)
 {
-  quad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
+  iquad quad({0, 0}, {10, 0}, {10, 10}, {0, 10});
   quad.rotate(45.0f);
 }
 

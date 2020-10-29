@@ -42,8 +42,15 @@ class trect;
 using irect = trect<int>;
 using frect = trect<float>;
 
-class line;
-class quad;
+template<typename T>
+class tline;
+using iline = tline<int>;
+using fline = tline<float>;
+
+template<typename T>
+class tquad;
+using iquad = tquad<int>;
+using fquad = tquad<float>;
 
 } // namespace geom
 

@@ -20,35 +20,111 @@
 #ifndef HEADER_GEOM_LINE_HPP
 #define HEADER_GEOM_LINE_HPP
 
-#include <glm/glm.hpp>
+#include "point.hpp"
 
 namespace geom {
 
-class line
+template<typename T>
+class tline
 {
 public:
-  glm::vec2 p1;
-  glm::vec2 p2;
+  tline() : p1(), p2() {}
 
-  line() : p1(), p2() {}
+  tline(tpoint<T> const& p1_,
+        tpoint<T> const& p2_)
+    : p1(p1_), p2(p2_)
+  {}
 
-  line(const glm::vec2& p1,
-       const glm::vec2& p2);
-
-  float length() const;
+  float length() const {
+    return geom::distance(p1, p2);
+  }
 
   /** Calculate if two lines intersec */
-  bool intersect(const line& line_b) const;
+  bool intersect(tline<T> const& line_b) const
+  {
+    float ua;
+    float ub;
+    return intersect(line_b, ua, ub);
+  }
 
   /** Calculate if and where two lines intersect */
-  bool intersect(const line& line_b, float& ua, float& ub) const;
+  bool intersect(tline<T> const& rhs, float& ua, float& ub) const
+  {
+    float const& x1 = p1.x;
+    float const& y1 = p1.y;
+
+    float const& x2 = p2.x;
+    float const& y2 = p2.y;
+
+    float const& x3 = rhs.p1.x;
+    float const& y3 = rhs.p1.y;
+
+    float const& x4 = rhs.p2.x;
+    float const& y4 = rhs.p2.y;
+
+    float quotient = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+
+    if (quotient == 0.0f) {
+      return false; // FIXME
+    } else {
+      ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / quotient;
+      ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / quotient;
+
+      return (ua >= 0.0f && ua <= 1.0f &&
+              ub >= 0.0f && ub <= 1.0f);
+    }
+  }
 
   /** Calculate if and where two lines intersect */
-  bool intersect(const line& line, glm::vec2& colpos) const;
+  bool intersect(const tline<T>& line, tpoint<T>& colpos) const
+  {
+    float ua, ub;
+    if (intersect(line, ua, ub))
+    {
+      colpos = p1 + ((p2 - p1) * ua);
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
 
   /** Calculate the minimal distance between this line and the point p */
-  float distance(const glm::vec2& p) const;
+  float distance(tpoint<T> const& p3) const
+  {
+    float const& x1 = p1.x();
+    float const& y1 = p1.y();
+
+    float const& x2 = p2.x();
+    float const& y2 = p2.y();
+
+    float const& x3 = p3.x();
+    float const& y3 = p3.y();
+
+    float u =
+      ((x3 - x1) * (x2 - x1) + (y3 - y1) * (y2 - y1)) /
+      (length() * length());
+
+    if (u < 0.0f) {
+      return glm::length(p1 - p3);
+    } else if (u > 1.0f) {
+      return glm::length(p2 - p3);
+    } else /* (u >= 0.0f && u <= 1.0f) */ {
+      glm::vec2 p4(x1 + u * (x2 - x1),
+                   y1 + u * (y2 - y1));
+
+      return glm::length(p4 - p3);
+    }
+  }
+
+public:
+  tpoint<T> p1;
+  tpoint<T> p2;
 };
+
+using iline = tline<int>;
+using fline = tline<float>;
 
 } // namespace geom
 
