@@ -37,12 +37,8 @@ endif()
 file(GLOB GEOM_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/geom/*.hpp)
 
-file(GLOB GEOM_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-  src/*.cpp)
-
-add_library(geomcpp STATIC ${GEOM_SOURCES})
+add_library(geomcpp INTERFACE)
 target_include_directories(geomcpp INTERFACE include/)
-target_include_directories(geomcpp PRIVATE include/geom/ src/)
 target_link_libraries(geomcpp INTERFACE glm::glm)
 set_target_properties(geomcpp PROPERTIES PUBLIC_HEADER
   "${GEOM_HEADERS}")
