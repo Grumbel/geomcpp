@@ -37,6 +37,8 @@ public:
     m_x(x), m_y(y) {}
   constexpr toffset(glm::tvec2<T> const& v) :
     m_x(v.x), m_y(v.y) {}
+  constexpr toffset(geom::tpoint<T> const& v) :
+    m_x(v.x()), m_y(v.y()) {}
   constexpr toffset(toffset const& p) = default;
 
   template<typename From>
