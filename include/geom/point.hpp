@@ -38,6 +38,8 @@ public:
     m_x(x), m_y(y) {}
   constexpr tpoint(glm::tvec2<T> const& v) :
     m_x(v.x), m_y(v.y) {}
+  constexpr tpoint(tsize<T> const& v) :
+    m_x(v.width()), m_y(v.height()) {}
   constexpr tpoint(tpoint const& p) = default;
 
   template<typename From>
