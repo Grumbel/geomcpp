@@ -159,6 +159,18 @@ bool contains(tsize<T> const& parent, tpoint<T> const& point)
           0 <= point.y() && point.y() < parent.height());
 }
 
+template<typename T> inline
+tsize<T> resize_to_fit(tsize<T> const& src, tsize<T> const& target)
+{
+  if (aspect_ratio(src) > aspect_ratio(target)) {
+    return tsize<T>(target.width(),
+                    src.height() * target.width() / src.width());
+  } else {
+    return tsize<T>(src.width() * target.height() / src.height(),
+                    target.height());
+  }
+}
+
 using isize = tsize<int>;
 using fsize = tsize<float>;
 

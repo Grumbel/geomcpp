@@ -19,7 +19,10 @@
 
 #include <gtest/gtest.h>
 
+#include <iostream>
+
 #include <geom/geom.hpp>
+#include <geom/io.hpp>
 
 using namespace geom;
 
@@ -160,6 +163,16 @@ TYPED_TEST(tsize_test, contains_point)
   EXPECT_FALSE(contains(size(20, 10), point(15, 10)));
   EXPECT_TRUE(contains(size(20, 10), point(0, 0)));
   EXPECT_FALSE(contains(size(20, 10), point(0, 20)));
+}
+
+TYPED_TEST(tsize_test, resize_to_fit)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_EQ(resize_to_fit(size(1024, 768), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(resize_to_fit(size(640, 480), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(resize_to_fit(size(640, 400), size(1024, 768)), size(1024, 640));
+  EXPECT_EQ(resize_to_fit(size(400, 640), size(768, 1024)), size(640, 1024));
 }
 
 /* EOF */
