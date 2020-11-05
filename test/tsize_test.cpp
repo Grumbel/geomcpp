@@ -175,4 +175,26 @@ TYPED_TEST(tsize_test, resize_to_fit)
   EXPECT_EQ(resize_to_fit(size(400, 640), size(768, 1024)), size(640, 1024));
 }
 
+TYPED_TEST(tsize_test, grow_to_fit)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_EQ(grow_to_fit(size(1600, 1200), size(1024, 768)), size(1600, 1200));
+  EXPECT_EQ(grow_to_fit(size(1024, 768), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(grow_to_fit(size(640, 480), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(grow_to_fit(size(640, 400), size(1024, 768)), size(1024, 640));
+  EXPECT_EQ(grow_to_fit(size(400, 640), size(768, 1024)), size(640, 1024));
+}
+
+TYPED_TEST(tsize_test, shrink_to_fit)
+{
+  using size = tsize<TypeParam>;
+
+  EXPECT_EQ(shrink_to_fit(size(1600, 1200), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(shrink_to_fit(size(1024, 768), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(shrink_to_fit(size(6400, 4800), size(1024, 768)), size(1024, 768));
+  EXPECT_EQ(shrink_to_fit(size(6400, 4000), size(1024, 768)), size(1024, 640));
+  EXPECT_EQ(shrink_to_fit(size(400, 640), size(768, 1024)), size(400, 640));
+}
+
 /* EOF */

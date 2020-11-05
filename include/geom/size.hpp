@@ -171,6 +171,26 @@ tsize<T> resize_to_fit(tsize<T> const& src, tsize<T> const& target)
   }
 }
 
+template<typename T> inline
+tsize<T> grow_to_fit(tsize<T> const& src, tsize<T> const& target)
+{
+  if (contains(target, src)) {
+    return resize_to_fit(src, target);
+  } else {
+    return src;
+  }
+}
+
+template<typename T> inline
+tsize<T> shrink_to_fit(tsize<T> const& src, tsize<T> const& target)
+{
+  if (contains(src, target)) {
+    return resize_to_fit(src, target);
+  } else {
+    return src;
+  }
+}
+
 using isize = tsize<int>;
 using fsize = tsize<float>;
 
