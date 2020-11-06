@@ -73,4 +73,73 @@ TEST(io_test, origin)
   EXPECT_EQ(out.str(), "top-left");
 }
 
+TEST(io_test, ipoint_from_string)
+{
+  EXPECT_EQ(ipoint(123, 456), ipoint_from_string("ipoint(123, 456)"));
+  EXPECT_EQ(ipoint(123, 456), ipoint_from_string("123, 456"));
+  EXPECT_EQ(ipoint(123, 456), ipoint_from_string("123,456"));
+  EXPECT_EQ(ipoint(123, 456), ipoint_from_string(" 123,456 "));
+  EXPECT_THROW({ipoint_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({ipoint_from_string("1,2,3");}, std::invalid_argument);
+}
+
+TEST(io_test, fpoint_from_string)
+{
+  EXPECT_EQ(fpoint(123, 456), fpoint_from_string("fpoint(123, 456)"));
+  EXPECT_EQ(fpoint(123, 456), fpoint_from_string("123, 456"));
+  EXPECT_EQ(fpoint(123, 456), fpoint_from_string("123,456"));
+  EXPECT_EQ(fpoint(123, 456), fpoint_from_string(" 123,456 "));
+  EXPECT_THROW({fpoint_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({fpoint_from_string("1,2,3");}, std::invalid_argument);
+}
+
+TEST(io_test, isize_from_string)
+{
+  EXPECT_EQ(isize(123, 456), isize_from_string("isize(123, 456)"));
+  EXPECT_EQ(isize(123, 456), isize_from_string("123, 456"));
+  EXPECT_EQ(isize(123, 456), isize_from_string("123,456"));
+  EXPECT_EQ(isize(123, 456), isize_from_string(" 123,456 "));
+  EXPECT_EQ(isize(123, 456), isize_from_string("123x456"));
+  EXPECT_EQ(isize(123, 456), isize_from_string(" 123x456 "));
+  EXPECT_THROW({isize_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({isize_from_string("1,2,3");}, std::invalid_argument);
+}
+
+TEST(io_test, fsize_from_string)
+{
+  EXPECT_EQ(fsize(123, 456), fsize_from_string("fsize(123, 456)"));
+  EXPECT_EQ(fsize(123, 456), fsize_from_string("123, 456"));
+  EXPECT_EQ(fsize(123, 456), fsize_from_string("123,456"));
+  EXPECT_EQ(fsize(123, 456), fsize_from_string(" 123,456 "));
+  EXPECT_EQ(fsize(123, 456), fsize_from_string("123x456"));
+  EXPECT_EQ(fsize(123, 456), fsize_from_string(" 123x456 "));
+  EXPECT_THROW({fsize_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({fsize_from_string("1,2,3");}, std::invalid_argument);
+}
+
+TEST(io_test, irect_from_string)
+{
+  EXPECT_EQ(irect(4, 5, 123, 456), irect_from_string("irect(4, 5, 123, 456)"));
+  EXPECT_EQ(irect(4, 5, 123, 456), irect_from_string("4, 5, 123, 456"));
+  EXPECT_EQ(irect(4, 5, 123, 456), irect_from_string("4,5,123,456"));
+  EXPECT_EQ(irect(4, 5, 123, 456), irect_from_string(" 4,5,123,456 "));
+  EXPECT_EQ(irect(isize(123, 456)), irect_from_string("123x456"));
+  EXPECT_EQ(irect(isize(123, 456)), irect_from_string(" 123x456 "));
+  EXPECT_EQ(irect(ipoint(4, 5), isize(123, 456)), irect_from_string("123x456+4+5"));
+  EXPECT_THROW({irect_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({irect_from_string("1,2,3,4,5");}, std::invalid_argument);
+}
+
+TEST(io_test, frect_from_string)
+{
+  EXPECT_EQ(frect(4, 5, 123, 456), frect_from_string("frect(4, 5, 123, 456)"));
+  EXPECT_EQ(frect(4, 5, 123, 456), frect_from_string("4, 5, 123, 456"));
+  EXPECT_EQ(frect(4, 5, 123, 456), frect_from_string("4,5,123,456"));
+  EXPECT_EQ(frect(fsize(123, 456)), frect_from_string("123x456"));
+  EXPECT_EQ(frect(fsize(123, 456)), frect_from_string(" 123x456 "));
+  EXPECT_EQ(frect(fpoint(4, 5), fsize(123, 456)), frect_from_string("123x456+4+5"));
+  EXPECT_THROW({frect_from_string("AxB");}, std::invalid_argument);
+  EXPECT_THROW({frect_from_string("1,2,3,4,5");}, std::invalid_argument);
+}
+
 /* EOF */
