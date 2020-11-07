@@ -78,7 +78,8 @@ public:
   /** Calculate if and where two lines intersect */
   bool intersect(const tline<T>& line, tpoint<T>& colpos) const
   {
-    float ua, ub;
+    float ua;
+    float ub;
     if (intersect(line, ua, ub))
     {
       colpos = p1 + ((p2 - p1) * ua);

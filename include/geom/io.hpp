@@ -164,7 +164,12 @@ inline
 irect irect_from_string(std::string const& text)
 {
   int pos;
-  int x1, y1, x2, y2, w, h;
+  int x1;
+  int y1;
+  int x2;
+  int y2;
+  int w;
+  int h;
   if (sscanf(text.c_str(), " %dx%d+%d+%d %n", &w, &h, &x1, &y1, &pos) == 4 &&
       pos == static_cast<int>(text.size())) {
     return irect(ipoint(x1, y1), isize(w, h));
@@ -188,7 +193,12 @@ inline
 frect frect_from_string(std::string const& text)
 {
   int pos;
-  float x1, y1, x2, y2, w, h;
+  float x1;
+  float y1;
+  float x2;
+  float y2;
+  float w;
+  float h;
   if (sscanf(text.c_str(), " %fx%f+%f+%f %n", &w, &h, &x1, &y1, &pos) == 4 &&
       pos == static_cast<int>(text.size())) {
     return frect(fpoint(x1, y1), fsize(w, h));
