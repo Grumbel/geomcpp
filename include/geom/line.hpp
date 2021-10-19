@@ -108,14 +108,14 @@ public:
       (length() * length());
 
     if (u < 0.0f) {
-      return glm::length(p1 - p3);
+      return glm::distance(p3.as_vec(), p1.as_vec());
     } else if (u > 1.0f) {
-      return glm::length(p2 - p3);
+      return glm::distance(p3.as_vec(), p2.as_vec());
     } else /* (u >= 0.0f && u <= 1.0f) */ {
       glm::vec2 p4(x1 + u * (x2 - x1),
                    y1 + u * (y2 - y1));
 
-      return glm::length(p4 - p3);
+      return glm::distance(p3.as_vec(), p4);
     }
   }
 

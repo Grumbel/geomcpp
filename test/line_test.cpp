@@ -40,4 +40,14 @@ TEST(LineTest, intersect)
   EXPECT_FLOAT_EQ(p.y(), 25.0f);
 }
 
+TEST(LineTest, distance)
+{
+  fline line({0.0f, 0.0f}, {100.0f, 100.0f});
+  fpoint point1(50.0f, 50.0f);
+  fpoint point2(60.0f, 40.0f);
+
+  EXPECT_FLOAT_EQ(line.distance(point1), 0.0f);
+  EXPECT_FLOAT_EQ(line.distance(point2), 14.142136f);
+}
+
 /* EOF */
