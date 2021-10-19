@@ -50,17 +50,17 @@ public:
   /** Calculate if and where two lines intersect */
   bool intersect(tline<T> const& rhs, float& ua, float& ub) const
   {
-    float const& x1 = p1.x;
-    float const& y1 = p1.y;
+    float const& x1 = p1.x();
+    float const& y1 = p1.y();
 
-    float const& x2 = p2.x;
-    float const& y2 = p2.y;
+    float const& x2 = p2.x();
+    float const& y2 = p2.y();
 
-    float const& x3 = rhs.p1.x;
-    float const& y3 = rhs.p1.y;
+    float const& x3 = rhs.p1.x();
+    float const& y3 = rhs.p1.y();
 
-    float const& x4 = rhs.p2.x;
-    float const& y4 = rhs.p2.y;
+    float const& x4 = rhs.p2.x();
+    float const& y4 = rhs.p2.y();
 
     float quotient = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
 
@@ -82,7 +82,7 @@ public:
     float ub;
     if (intersect(line, ua, ub))
     {
-      colpos = p1 + ((p2 - p1) * ua);
+      colpos = tpoint<T>(p1.as_vec() + ((p2.as_vec() - p1.as_vec()) * ua));
       return true;
     }
     else

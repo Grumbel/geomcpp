@@ -29,4 +29,15 @@ TEST(LineTest, length)
   EXPECT_FLOAT_EQ(line.length(), 50.0f);
 }
 
+TEST(LineTest, intersect)
+{
+  fline line1({0.0f, 0.0f}, {100.0f, 50.0f});
+  fline line2({0.0f, 50.0f}, {100.0f, 0.0f});
+
+  fpoint p;
+  ASSERT_TRUE(line1.intersect(line2, p));
+  EXPECT_FLOAT_EQ(p.x(), 50.0f);
+  EXPECT_FLOAT_EQ(p.y(), 25.0f);
+}
+
 /* EOF */
