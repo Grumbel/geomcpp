@@ -40,7 +40,7 @@ file(GLOB GEOM_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
 add_library(geomcpp INTERFACE)
 target_include_directories(geomcpp INTERFACE include/)
 target_link_libraries(geomcpp INTERFACE glm::glm)
-target_compile_definitions(geomcpp PUBLIC -DGLM_ENABLE_EXPERIMENTAL)
+target_compile_definitions(geomcpp INTERFACE -DGLM_ENABLE_EXPERIMENTAL)
 set_target_properties(geomcpp PROPERTIES PUBLIC_HEADER
   "${GEOM_HEADERS}")
 
