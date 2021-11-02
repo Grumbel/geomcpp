@@ -24,6 +24,7 @@
 #include <glm/glm.hpp>
 
 #include "fwd.hpp"
+#include "origin.hpp"
 #include "size.hpp"
 
 namespace geom {
@@ -128,6 +129,43 @@ template<typename T> inline
 toffset<T> operator/(toffset<T> const& offset, T s) {
   return toffset<T>(offset.x() / s,
                     offset.y() / s);
+}
+
+template<typename T> inline
+toffset<T> anchor_offset(tsize<T> const& size, origin origin)
+{
+  switch(origin)
+  {
+    case origin::TOP_LEFT:
+      return toffset<T>(0, 0);
+
+    case origin::TOP_CENTER:
+      return toffset<T>(-size.width() / 2, 0);
+
+    case origin::TOP_RIGHT:
+      return toffset<T>(-size.width(), 0);
+
+    case origin::CENTER_LEFT:
+      return toffset<T>(0, -size.height() / 2);
+
+    case origin::CENTER:
+      return toffset<T>(-size.width() / 2, -size.height() / 2);
+
+    case origin::CENTER_RIGHT:
+      return toffset<T>(-size.width(), -size.height() / 2);
+
+    case origin::BOTTOM_LEFT:
+      return toffset<T>(0, -size.height());
+
+    case origin::BOTTOM_CENTER:
+      return toffset<T>(-size.width() / 2, -size.height());
+
+    case origin::BOTTOM_RIGHT:
+      return toffset<T>(-size.width(), -size.height());
+
+    default:
+      throw std::invalid_argument("invalid value for origin");
+  }
 }
 
 using ioffset = toffset<int>;

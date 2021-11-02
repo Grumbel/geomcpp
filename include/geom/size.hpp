@@ -98,42 +98,6 @@ T area(tsize<T> const& size) {
 }
 
 template<typename T> inline
-tpoint<T> anchor_point(tsize<T> const& size, origin origin) {
-  switch(origin)
-  {
-    case origin::TOP_LEFT:
-      return tpoint<T>(0, 0);
-
-    case origin::TOP_CENTER:
-      return tpoint<T>(size.width() / 2, 0);
-
-    case origin::TOP_RIGHT:
-      return tpoint<T>(size.width(), 0);
-
-    case origin::CENTER_LEFT:
-      return tpoint<T>(0, size.height() / 2);
-
-    case origin::CENTER:
-      return tpoint<T>(size.width() / 2, size.height() / 2);
-
-    case origin::CENTER_RIGHT:
-      return tpoint<T>(size.width(), size.height() / 2);
-
-    case origin::BOTTOM_LEFT:
-      return tpoint<T>(0, size.height());
-
-    case origin::BOTTOM_CENTER:
-      return tpoint<T>(size.width() / 2, size.height());
-
-    case origin::BOTTOM_RIGHT:
-      return tpoint<T>(size.width(), size.height());
-
-    default:
-      throw std::invalid_argument("invalid value for origin");
-  }
-}
-
-template<typename T> inline
 tsize<T> transpose(tsize<T> const& size)
 {
   return tsize<T>(size.height(), size.width());

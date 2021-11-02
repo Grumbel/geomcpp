@@ -210,4 +210,38 @@ TYPED_TEST(trect_test, diagonal)
   EXPECT_FLOAT_EQ(diagonal(rect(0, 0, 40, 30)), 50.0f);
 }
 
+TYPED_TEST(trect_test, anchored_rect)
+{
+  using point = tpoint<TypeParam>;
+  using size = tsize<TypeParam>;
+  using rect = trect<TypeParam>;
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::TOP_LEFT),
+            rect(100, 50, 160, 90));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::TOP_CENTER),
+            rect(70, 50, 130, 90));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::TOP_RIGHT),
+            rect(40, 50, 100, 90));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::CENTER_LEFT),
+            rect(100, 30, 160, 70));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::CENTER),
+            rect(70, 30, 130, 70));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::CENTER_RIGHT),
+            rect(40, 30, 100, 70));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::BOTTOM_LEFT),
+            rect(100, 10, 160, 50));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::BOTTOM_CENTER),
+            rect(70, 10, 130, 50));
+
+  EXPECT_EQ(anchored_rect(point(100, 50), size(60, 40), origin::BOTTOM_RIGHT),
+            rect(40, 10, 100, 50));
+}
+
 /* EOF */
