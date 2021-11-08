@@ -34,14 +34,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(NOT TARGET glm::glm)
-  find_package(glm REQUIRED)
+  find_package(glm REQUIRED IMPORTED_TARGET)
 endif()
 
 file(GLOB GEOM_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/geom/*.hpp)
 
 add_library(geomcpp INTERFACE)
-target_include_directories(geomcpp INTERFACE include/)
+target_include_directories(geomcpp INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 target_link_libraries(geomcpp INTERFACE glm::glm)
 target_compile_definitions(geomcpp INTERFACE -DGLM_ENABLE_EXPERIMENTAL)
 set_target_properties(geomcpp PROPERTIES PUBLIC_HEADER
@@ -56,8 +58,21 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
   DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
 install(TARGETS geomcpp
+  EXPORT geomcpp-targets
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
   PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/geom/")
+
+# CMake integration
+configure_file(geomcpp-config.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-config.cmake" @ONLY)
+install(FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-config.cmake"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/geomcpp/")
+export(TARGETS geomcpp
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-targets.cmake")
+export(PACKAGE geomcpp)
+install(EXPORT geomcpp-targets
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/geomcpp/")
 
 if(BUILD_TESTS)
   enable_testing()

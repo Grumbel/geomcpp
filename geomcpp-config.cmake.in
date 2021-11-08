@@ -1,0 +1,10 @@
+get_filename_component(GEOMCPP_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+include(CMakeFindDependencyMacro)
+find_dependency(glm REQUIRED IMPORTED_TARGET)
+
+if(NOT TARGET geomcpp)
+  include("${GEOMCPP_CMAKE_DIR}/geomcpp-targets.cmake")
+endif()
+
+# EOF #
