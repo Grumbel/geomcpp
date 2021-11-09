@@ -3,8 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
+    nix.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+
     tinycmmc.url = "gitlab:grumbel/cmake-modules";
+    tinycmmc.inputs.nix.follows = "nix";
+    tinycmmc.inputs.nixpkgs.follows = "nixpkgs";
+    tinycmmc.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs = { self, nix, nixpkgs, flake-utils, tinycmmc }:
@@ -17,8 +22,17 @@
             pname = "geomcpp";
             version = "0.0.0";
             src = nixpkgs.lib.cleanSource ./.;
-            nativeBuildInputs = [ pkgs.cmake pkgs.ninja pkgs.gcc tinycmmc.defaultPackage.${system} ];
-            buildInputs = [ pkgs.glm ];
+            nativeBuildInputs = [
+              pkgs.cmake
+              pkgs.ninja
+              pkgs.gcc
+            ];
+            buildInputs = [
+              tinycmmc.defaultPackage.${system}
+            ];
+            propagatedBuildInputs = [
+              pkgs.glm
+            ];
            };
         };
         defaultPackage = packages.geomcpp;
