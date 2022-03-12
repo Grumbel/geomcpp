@@ -33,9 +33,12 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(NOT TARGET glm::glm)
-  find_package(glm REQUIRED)
-endif()
+function(build_dependencies)
+  if(NOT TARGET glm::glm)
+    find_package(glm REQUIRED)
+  endif()
+endfunction()
+build_dependencies()
 
 file(GLOB GEOM_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/geom/*.hpp)
@@ -56,11 +59,6 @@ configure_file(
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
   DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-
-install(TARGETS geomcpp
-  EXPORT geomcpp-targets
-  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-  PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/geom/")
 
 # CMake integration
 configure_file(geomcpp-config.cmake.in
@@ -92,5 +90,7 @@ if(BUILD_TESTS)
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMAND test_geomcpp)
 endif()
+
+include(ExportAndInstallLibrary)
 
 # EOF #
