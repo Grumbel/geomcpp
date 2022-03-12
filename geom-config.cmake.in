@@ -1,7 +1,12 @@
-get_filename_component(GEOMCPP_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/geom-config-version.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/geom-targets.cmake")
 
 include(CMakeFindDependencyMacro)
 
+# not using find_dependency() here as it causes this error:
+#
 # CMake Error at /nix/store/dqhm15am1f28vsyp19jh07xk8dmaz8ai-glm-0.9.9.8/lib/cmake/glm/glmConfig-version.cmake:2 (if):
 #   if given arguments:
 #
@@ -14,8 +19,6 @@ if(NOT TARGET glm::glm)
   find_package(glm "0.0.0")
 endif()
 
-if(NOT TARGET geomcpp)
-  include("${GEOMCPP_CMAKE_DIR}/geomcpp-targets.cmake")
-endif()
+check_required_components(geom)
 
 # EOF #
