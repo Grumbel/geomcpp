@@ -1,4 +1,4 @@
-# geomcpp - Basic collection of point, size and rect classes
+# geom - Basic collection of point, size and rect classes
 # Copyright (C) 2020 Ingo Ruhnke <grumbel@gmail.com>
 #
 # This software is provided 'as-is', without any express or implied
@@ -18,7 +18,7 @@
 # 3. This notice may not be removed or altered from any source distribution.
 
 cmake_minimum_required(VERSION 3.6)
-project(geomcpp VERSION 0.0.0)
+project(geom VERSION 0.0.0)
 
 set(TINYCMMC_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/external/cmake-modules/modules/")
 find_package(tinycmmc CONFIG)
@@ -43,52 +43,40 @@ build_dependencies()
 file(GLOB GEOM_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/geom/*.hpp)
 
-add_library(geomcpp INTERFACE)
-target_include_directories(geomcpp INTERFACE
+add_library(geom INTERFACE)
+target_include_directories(geom INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(geomcpp INTERFACE glm::glm)
-target_compile_definitions(geomcpp INTERFACE -DGLM_ENABLE_EXPERIMENTAL)
-set_target_properties(geomcpp PROPERTIES PUBLIC_HEADER
+target_link_libraries(geom INTERFACE glm::glm)
+target_compile_definitions(geom INTERFACE -DGLM_ENABLE_EXPERIMENTAL)
+set_target_properties(geom PROPERTIES PUBLIC_HEADER
   "${GEOM_HEADERS}")
 
 configure_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/geomcpp.pc.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/geom.pc.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/geom.pc"
   @ONLY)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/geomcpp.pc"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/geom.pc"
   DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
-
-# CMake integration
-configure_file(geomcpp-config.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-config.cmake" @ONLY)
-install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-config.cmake"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/geomcpp/")
-export(TARGETS geomcpp
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/geomcpp-targets.cmake")
-export(PACKAGE geomcpp)
-install(EXPORT geomcpp-targets
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/geomcpp/")
 
 if(BUILD_TESTS)
   enable_testing()
   find_package(GTest REQUIRED)
 
   # build automatic tests
-  file(GLOB TEST_GEOMCPP_SOURCES test/*_test.cpp)
-  add_executable(test_geomcpp ${TEST_GEOMCPP_SOURCES})
-  target_compile_options(test_geomcpp PRIVATE ${WARNINGS_CXX_FLAGS})
-  target_link_libraries(test_geomcpp
+  file(GLOB TEST_GEOM_SOURCES test/*_test.cpp)
+  add_executable(test_geom ${TEST_GEOM_SOURCES})
+  target_compile_options(test_geom PRIVATE ${WARNINGS_CXX_FLAGS})
+  target_link_libraries(test_geom
     GTest::GTest
     GTest::Main
-    geomcpp)
+    geom)
 
   set(ARGV "-V")
-  add_test(NAME test_geomcpp
+  add_test(NAME test_geom
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMAND test_geomcpp)
+    COMMAND test_geom)
 endif()
 
 include(ExportAndInstallLibrary)
