@@ -20,10 +20,12 @@
 #ifndef HEADER_GEOMCPP_POINT_HPP
 #define HEADER_GEOMCPP_POINT_HPP
 
+#include <algorithm>
 #include <math.h>
 #include <glm/glm.hpp>
 
 #include "fwd.hpp"
+#include "rect.hpp"
 #include "size.hpp"
 #include "offset.hpp"
 
@@ -135,6 +137,13 @@ tpoint<T> interpolate(tpoint<T> const lhs, tpoint<T> const rhs, float alpha)
 {
   return tpoint<T>(static_cast<T>(static_cast<float>(lhs.x()) * (1.0f - alpha) + static_cast<float>(rhs.x()) * alpha),
                    static_cast<T>(static_cast<float>(lhs.y()) * (1.0f - alpha) + static_cast<float>(rhs.y()) * alpha));
+}
+
+template<typename T> inline
+tpoint<T> clamp(tpoint<T> const& point, trect<T> const& limits)
+{
+  return tpoint<T>(std::clamp(point.x(), limits.left(), limits.right()),
+                   std::clamp(point.y(), limits.top(), limits.bottom()));
 }
 
 using ipoint = tpoint<int>;

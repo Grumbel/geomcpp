@@ -105,4 +105,14 @@ TYPED_TEST(tpoint_test, interpolate)
             point(20, 15));
 }
 
+TYPED_TEST(tpoint_test, clamp)
+{
+  using point = tpoint<TypeParam>;
+  using rect = trect<TypeParam>;
+
+  EXPECT_EQ(geom::clamp(point(0, 0), rect(20, 50, 200, 500)), point(20, 50));
+  EXPECT_EQ(geom::clamp(point(1000, 5000), rect(20, 50, 200, 500)), point(200, 500));
+  EXPECT_EQ(geom::clamp(point(100, 150), rect(20, 50, 200, 500)), point(100, 150));
+}
+
 /* EOF */
