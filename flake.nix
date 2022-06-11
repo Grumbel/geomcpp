@@ -20,6 +20,9 @@
             pname = "geomcpp";
             version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
+            postPatch = ''
+              echo "v${tinycmmc.lib.versionFromFile self}" > VERSION
+            '';
             doCheck = true;
             cmakeFlags = [
               "-DWARNINGS=ON"
