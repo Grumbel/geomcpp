@@ -20,20 +20,10 @@
 cmake_minimum_required(VERSION 3.6)
 project(geom VERSION 0.0.0)
 
-set(TINYCMMC_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/external/tinycmmc/modules/")
-find_package(tinycmmc CONFIG)
-message(STATUS "tinycmmc module path: ${TINYCMMC_MODULE_PATH}")
-list(APPEND CMAKE_MODULE_PATH ${TINYCMMC_MODULE_PATH})
-
-include(GNUInstallDirs)
-include(MaximumWarnings)
-include(ClangTidy)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+include(mk/cmake/TinyCMMC.cmake)
 
 function(build_dependencies)
+  # Must guard find_package(glm) as otherwise error will result
   if(NOT TARGET glm::glm)
     find_package(glm REQUIRED)
   endif()
@@ -67,7 +57,7 @@ if(BUILD_TESTS)
   # build automatic tests
   file(GLOB TEST_GEOM_SOURCES test/*_test.cpp)
   add_executable(test_geom ${TEST_GEOM_SOURCES})
-  target_compile_options(test_geom PRIVATE ${WARNINGS_CXX_FLAGS})
+  target_compile_options(test_geom PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
   target_link_libraries(test_geom
     GTest::GTest
     GTest::Main
@@ -79,6 +69,6 @@ if(BUILD_TESTS)
     COMMAND test_geom)
 endif()
 
-include(ExportAndInstallLibrary)
+tinycmmc_export_and_install_library(geom)
 
 # EOF #
