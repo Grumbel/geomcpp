@@ -18,16 +18,23 @@
         packages = flake-utils.lib.flattenTree {
           geomcpp = pkgs.stdenv.mkDerivation {
             pname = "geomcpp";
-            version = "0.0.0";
+            version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
+            cmakeFlags = [
+              "-DWARNINGS=ON"
+              "-DWERROR=ON"
+              "-DBUILD_TESTS=ON"
+            ];
             nativeBuildInputs = [
               pkgs.cmake
             ];
-            buildInputs = [
+            buildInputs = with pkgs; [
+              gtest
+            ] ++ [
               tinycmmc.defaultPackage.${system}
             ];
-            propagatedBuildInputs = [
-              pkgs.glm
+            propagatedBuildInputs = with pkgs; [
+              glm
             ];
            };
         };
