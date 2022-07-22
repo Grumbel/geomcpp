@@ -14,8 +14,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-      in rec {
-        packages = flake-utils.lib.flattenTree {
+      in {
+        packages = flake-utils.lib.flattenTree rec {
           geomcpp = pkgs.stdenv.mkDerivation {
             pname = "geomcpp";
             version = tinycmmc.lib.versionFromFile self;
@@ -35,13 +35,14 @@
             buildInputs = with pkgs; [
               gtest
             ] ++ [
-              tinycmmc.defaultPackage.${system}
+              tinycmmc.packages.${system}.default
             ];
             propagatedBuildInputs = with pkgs; [
               glm
             ];
            };
+          default = geomcpp;
         };
-        defaultPackage = packages.geomcpp;
-      });
+      }
+    );
 }
