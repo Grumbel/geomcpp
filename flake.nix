@@ -11,37 +11,15 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, tinycmmc }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
+    tinycmmc.lib.eachSystemWithPkgs (pkgs:
+      {
         packages = flake-utils.lib.flattenTree rec {
-          geomcpp = pkgs.stdenv.mkDerivation {
-            pname = "geomcpp";
-            version = tinycmmc.lib.versionFromFile self;
-            src = nixpkgs.lib.cleanSource ./.;
-            postPatch = ''
-              echo "v${tinycmmc.lib.versionFromFile self}" > VERSION
-            '';
-            doCheck = true;
-            cmakeFlags = [
-              "-DWARNINGS=ON"
-              "-DWERROR=ON"
-              "-DBUILD_TESTS=ON"
-            ];
-            nativeBuildInputs = with pkgs; [
-              cmake
-            ];
-            buildInputs = with pkgs; [
-              gtest
-            ] ++ [
-              tinycmmc.packages.${system}.default
-            ];
-            propagatedBuildInputs = with pkgs; [
-              glm
-            ];
-           };
           default = geomcpp;
+          geomcpp = pkgs.callPackage ./geomcpp.nix {
+            inherit self;
+            tinycmmc_lib = tinycmmc.lib;
+            tinycmmc = tinycmmc.packages.${pkgs.system}.default;
+          };
         };
       }
     );
