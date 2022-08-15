@@ -19,6 +19,9 @@
             inherit self;
             tinycmmc_lib = tinycmmc.lib;
             tinycmmc = tinycmmc.packages.${pkgs.system}.default;
+
+            # Allow the glm package on systems other than Unix
+            glm = pkgs.glm.overrideAttrs (oldAttrs: { meta = {}; });
           };
         };
       }
