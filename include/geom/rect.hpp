@@ -47,7 +47,7 @@ public:
   constexpr trect(trect<T> const& rect) = default;
 
   template<typename From>
-  constexpr explicit trect<T>(trect<From> const& rect) :
+  constexpr explicit trect(trect<From> const& rect) :
     m_point(tpoint<T>(rect.point())),
     m_size(tsize<T>(rect.size()))
   {}

@@ -43,7 +43,7 @@ public:
   constexpr toffset(toffset const& p) = default;
 
   template<typename From>
-  constexpr explicit toffset<T>(toffset<From> const& offset) :
+  constexpr explicit toffset(toffset<From> const& offset) :
     m_x(static_cast<T>(offset.x())),
     m_y(static_cast<T>(offset.y()))
   {}
