@@ -17,7 +17,7 @@
           geomcpp = pkgs.callPackage ./geomcpp.nix {
             inherit self;
             tinycmmc_lib = tinycmmc.lib;
-            tinycmmc = tinycmmc.packages.${pkgs.system}.default;
+            tinycmmc = tinycmmc.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
             # Allow the glm package on systems other than Unix
             glm = pkgs.glm.overrideAttrs (oldAttrs: { meta = {}; });
