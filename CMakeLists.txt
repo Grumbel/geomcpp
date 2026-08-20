@@ -18,7 +18,7 @@
 # 3. This notice may not be removed or altered from any source distribution.
 
 cmake_minimum_required(VERSION 3.6)
-project(geom VERSION 0.0.0)
+project(geom)
 
 include(mk/cmake/TinyCMMC.cmake)
 
