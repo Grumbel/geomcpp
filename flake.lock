@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1786106723,
-        "narHash": "sha256-zDSUbpoeo/9ZmD2+wXnzxoo1+uhL8vxc0b8yuYMKYq0=",
+        "lastModified": 1787135253,
+        "narHash": "sha256-RD2kNWCG+Bjo6h+JVjWVNntZs2GtRoeY2xHjts/FNkA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f13ff45afd1bb73e640eaa08a7066dbed07e3238",
+        "rev": "ffb3c9b700e759be2ef13237c9d8f953b32a1e46",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786345348,
-        "narHash": "sha256-dpvTjt3Z8m9z6/KandNFY+QvREnEW+kEiL8YeW/IYGM=",
+        "lastModified": 1787238930,
+        "narHash": "sha256-kmFvY8ssxULmN1An3GnjmG6sNc8OSL16JCLNIN5Tcws=",
         "ref": "refs/heads/master",
-        "rev": "50c49bf8a45f7c5ddb0c5f838a0fd6a00845a04d",
-        "revCount": 67,
+        "rev": "356564fa4c18e4b35fcf2d2645f32a2e8e6b0986",
+        "revCount": 71,
         "type": "git",
         "url": "https://github.com/grumbel/tinycmmc.git"
       },
