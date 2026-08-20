@@ -37,7 +37,7 @@
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "tinycmmc": "tinycmmc"
+        "flake-utils": "flake-utils"
       }
     },
     "systems": {
@@ -53,27 +53,6 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
-      }
-    },
-    "tinycmmc": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1787238930,
-        "narHash": "sha256-kmFvY8ssxULmN1An3GnjmG6sNc8OSL16JCLNIN5Tcws=",
-        "ref": "refs/heads/master",
-        "rev": "356564fa4c18e4b35fcf2d2645f32a2e8e6b0986",
-        "revCount": 71,
-        "type": "git",
-        "url": "https://github.com/grumbel/tinycmmc.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://github.com/grumbel/tinycmmc.git"
       }
     }
   },
